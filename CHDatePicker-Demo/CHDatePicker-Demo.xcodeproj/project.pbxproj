@@ -1,0 +1,436 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		391FC50980FAB4D6F086C2ED /* libPods-CHDatePicker-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BEC4405124A7FE02B028A71 /* libPods-CHDatePicker-Demo.a */; };
+		433409CB221A46E30012142E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 433409CA221A46E30012142E /* AppDelegate.m */; };
+		433409CE221A46E30012142E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 433409CD221A46E30012142E /* ViewController.m */; };
+		433409D1221A46E30012142E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 433409CF221A46E30012142E /* Main.storyboard */; };
+		433409D4221A46E30012142E /* CHDatePicker_Demo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 433409D2221A46E30012142E /* CHDatePicker_Demo.xcdatamodeld */; };
+		433409D6221A46E70012142E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 433409D5221A46E70012142E /* Assets.xcassets */; };
+		433409D9221A46E70012142E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 433409D7221A46E70012142E /* LaunchScreen.storyboard */; };
+		433409DC221A46E70012142E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 433409DB221A46E70012142E /* main.m */; };
+		433409EB221A6C210012142E /* NSDate+CHCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 433409E8221A6C210012142E /* NSDate+CHCategory.m */; };
+		43FAC698221A979A004FCF0D /* CHDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FAC697221A979A004FCF0D /* CHDatePickerView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		433409C6221A46E30012142E /* CHDatePicker-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CHDatePicker-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		433409C9221A46E30012142E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		433409CA221A46E30012142E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		433409CC221A46E30012142E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		433409CD221A46E30012142E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		433409D0221A46E30012142E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		433409D3221A46E30012142E /* CHDatePicker_Demo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CHDatePicker_Demo.xcdatamodel; sourceTree = "<group>"; };
+		433409D5221A46E70012142E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		433409D8221A46E70012142E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		433409DA221A46E70012142E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		433409DB221A46E70012142E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		433409E8221A6C210012142E /* NSDate+CHCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CHCategory.m"; sourceTree = "<group>"; };
+		433409E9221A6C210012142E /* CHDateSourceHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDateSourceHeader.h; sourceTree = "<group>"; };
+		433409EA221A6C210012142E /* NSDate+CHCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+CHCategory.h"; sourceTree = "<group>"; };
+		43FAC696221A979A004FCF0D /* CHDatePickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHDatePickerView.h; sourceTree = "<group>"; };
+		43FAC697221A979A004FCF0D /* CHDatePickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHDatePickerView.m; sourceTree = "<group>"; };
+		9AB0A7B1A46514D87B34126A /* Pods-CHDatePicker-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHDatePicker-Demo.debug.xcconfig"; path = "Target Support Files/Pods-CHDatePicker-Demo/Pods-CHDatePicker-Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		9BEC4405124A7FE02B028A71 /* libPods-CHDatePicker-Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CHDatePicker-Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E006EC387A45282FDC2E51BB /* Pods-CHDatePicker-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHDatePicker-Demo.release.xcconfig"; path = "Target Support Files/Pods-CHDatePicker-Demo/Pods-CHDatePicker-Demo.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		433409C3221A46E30012142E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				391FC50980FAB4D6F086C2ED /* libPods-CHDatePicker-Demo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1BB8CC4E4B858B6AF7AC75DE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9BEC4405124A7FE02B028A71 /* libPods-CHDatePicker-Demo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		433409BD221A46E30012142E = {
+			isa = PBXGroup;
+			children = (
+				433409C8221A46E30012142E /* CHDatePicker-Demo */,
+				433409C7221A46E30012142E /* Products */,
+				AEF84BC7CA2FFFAAB3D12B54 /* Pods */,
+				1BB8CC4E4B858B6AF7AC75DE /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		433409C7221A46E30012142E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				433409C6221A46E30012142E /* CHDatePicker-Demo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		433409C8221A46E30012142E /* CHDatePicker-Demo */ = {
+			isa = PBXGroup;
+			children = (
+				433409E7221A6C210012142E /* CHDateSource */,
+				433409C9221A46E30012142E /* AppDelegate.h */,
+				433409CA221A46E30012142E /* AppDelegate.m */,
+				433409CC221A46E30012142E /* ViewController.h */,
+				433409CD221A46E30012142E /* ViewController.m */,
+				433409CF221A46E30012142E /* Main.storyboard */,
+				433409D5221A46E70012142E /* Assets.xcassets */,
+				433409D7221A46E70012142E /* LaunchScreen.storyboard */,
+				433409DA221A46E70012142E /* Info.plist */,
+				433409DB221A46E70012142E /* main.m */,
+				433409D2221A46E30012142E /* CHDatePicker_Demo.xcdatamodeld */,
+			);
+			path = "CHDatePicker-Demo";
+			sourceTree = "<group>";
+		};
+		433409E7221A6C210012142E /* CHDateSource */ = {
+			isa = PBXGroup;
+			children = (
+				433409E9221A6C210012142E /* CHDateSourceHeader.h */,
+				43FAC696221A979A004FCF0D /* CHDatePickerView.h */,
+				43FAC697221A979A004FCF0D /* CHDatePickerView.m */,
+				433409EA221A6C210012142E /* NSDate+CHCategory.h */,
+				433409E8221A6C210012142E /* NSDate+CHCategory.m */,
+			);
+			name = CHDateSource;
+			path = ../../CHDateSource;
+			sourceTree = "<group>";
+		};
+		AEF84BC7CA2FFFAAB3D12B54 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9AB0A7B1A46514D87B34126A /* Pods-CHDatePicker-Demo.debug.xcconfig */,
+				E006EC387A45282FDC2E51BB /* Pods-CHDatePicker-Demo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		433409C5221A46E30012142E /* CHDatePicker-Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 433409DF221A46E70012142E /* Build configuration list for PBXNativeTarget "CHDatePicker-Demo" */;
+			buildPhases = (
+				35F9AA883B0C02B6613AEBBE /* [CP] Check Pods Manifest.lock */,
+				433409C2221A46E30012142E /* Sources */,
+				433409C3221A46E30012142E /* Frameworks */,
+				433409C4221A46E30012142E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CHDatePicker-Demo";
+			productName = "CHDatePicker-Demo";
+			productReference = 433409C6221A46E30012142E /* CHDatePicker-Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		433409BE221A46E30012142E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "张晨晖";
+				TargetAttributes = {
+					433409C5221A46E30012142E = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = 433409C1221A46E30012142E /* Build configuration list for PBXProject "CHDatePicker-Demo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 433409BD221A46E30012142E;
+			productRefGroup = 433409C7221A46E30012142E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				433409C5221A46E30012142E /* CHDatePicker-Demo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		433409C4221A46E30012142E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				433409D9221A46E70012142E /* LaunchScreen.storyboard in Resources */,
+				433409D6221A46E70012142E /* Assets.xcassets in Resources */,
+				433409D1221A46E30012142E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		35F9AA883B0C02B6613AEBBE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CHDatePicker-Demo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		433409C2221A46E30012142E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				433409D4221A46E30012142E /* CHDatePicker_Demo.xcdatamodeld in Sources */,
+				433409CE221A46E30012142E /* ViewController.m in Sources */,
+				433409DC221A46E70012142E /* main.m in Sources */,
+				433409CB221A46E30012142E /* AppDelegate.m in Sources */,
+				433409EB221A6C210012142E /* NSDate+CHCategory.m in Sources */,
+				43FAC698221A979A004FCF0D /* CHDatePickerView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		433409CF221A46E30012142E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				433409D0221A46E30012142E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		433409D7221A46E70012142E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				433409D8221A46E70012142E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		433409DD221A46E70012142E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		433409DE221A46E70012142E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		433409E0221A46E70012142E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9AB0A7B1A46514D87B34126A /* Pods-CHDatePicker-Demo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = F22VTWNS57;
+				INFOPLIST_FILE = "CHDatePicker-Demo/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.chenhuizhang.CHDatePicker-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		433409E1221A46E70012142E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E006EC387A45282FDC2E51BB /* Pods-CHDatePicker-Demo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = F22VTWNS57;
+				INFOPLIST_FILE = "CHDatePicker-Demo/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.chenhuizhang.CHDatePicker-Demo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		433409C1221A46E30012142E /* Build configuration list for PBXProject "CHDatePicker-Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				433409DD221A46E70012142E /* Debug */,
+				433409DE221A46E70012142E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		433409DF221A46E70012142E /* Build configuration list for PBXNativeTarget "CHDatePicker-Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				433409E0221A46E70012142E /* Debug */,
+				433409E1221A46E70012142E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		433409D2221A46E30012142E /* CHDatePicker_Demo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				433409D3221A46E30012142E /* CHDatePicker_Demo.xcdatamodel */,
+			);
+			currentVersion = 433409D3221A46E30012142E /* CHDatePicker_Demo.xcdatamodel */;
+			path = CHDatePicker_Demo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 433409BE221A46E30012142E /* Project object */;
+}
