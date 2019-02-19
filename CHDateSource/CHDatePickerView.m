@@ -390,7 +390,7 @@
                     break;
                 case CHDatePickerViewDateComponentD:
                     [self.pickerView selectRow:days - 1 inComponent:i animated:YES];
-                    day = days - 1;
+                    day = days;
                     break;
                 case CHDatePickerViewDateComponentH:
                     break;
