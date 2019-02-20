@@ -7,8 +7,9 @@
 //
 
 #import "CHDatePickerView.h"
-#import "NSDate+CHCategory.h"
 #import "Masonry.h"
+#import "NSDate+CHCategory.h"
+#import "NSBundle+CHDatePicker.h"
 
 @interface CHDatePickerView () <UIPickerViewDataSource ,UIPickerViewDelegate>
 
@@ -23,12 +24,6 @@
 
 /// 按钮背景板
 @property (nonatomic ,strong) UIView *viewButtonBackground;
-
-/// 确认按钮
-@property (nonatomic ,strong) UIButton *buttonConfirm;
-
-/// 取消按钮
-@property (nonatomic ,strong) UIButton *buttonCancel;
 
 /// 当前选中日期
 @property (nonatomic ,strong) NSDate *selectDate;
@@ -69,7 +64,7 @@
 
 - (UIFont *)textFont {
     if (!_textFont) {
-        _textFont = [UIFont systemFontOfSize:12];
+        _textFont = [UIFont systemFontOfSize:14];
     }
     return _textFont;
 }
@@ -141,7 +136,6 @@
     self.hidden = YES;
 
     self.viewShade = [UIView new];
-    self.viewShade.backgroundColor = [UIColor colorWithWhite:.25 alpha:.5];
     [self addSubview:self.viewShade];
     [self.viewShade mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.offset(0);
@@ -154,8 +148,8 @@
     self.viewBottom.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.viewBottom];
     [self.viewBottom mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.bottom.right.offset(0);
-        make.height.offset(240);
+        make.top.equalTo(self.mas_bottom);
+        make.left.right.offset(0);
     }];
 
     self.viewButtonBackground = [UIView new];
@@ -167,7 +161,8 @@
     }];
 
     self.buttonConfirm = [UIButton new];
-    [self.buttonConfirm setTitle:@"确认" forState:UIControlStateNormal];
+    [self.buttonConfirm setTitle:[NSBundle ch_localizedStringForKey:@"Confirm"] forState:UIControlStateNormal];
+    self.buttonConfirm.titleLabel.font = [UIFont systemFontOfSize:14];
     [self.buttonConfirm setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [self.viewButtonBackground addSubview:self.buttonConfirm];
     [self.buttonConfirm mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -176,7 +171,8 @@
     }];
 
     self.buttonCancel = [UIButton new];
-    [self.buttonCancel setTitle:@"取消" forState:UIControlStateNormal];
+    [self.buttonCancel setTitle:[NSBundle ch_localizedStringForKey:@"Cancel"] forState:UIControlStateNormal];
+    self.buttonCancel.titleLabel.font = [UIFont systemFontOfSize:14];
     [self.buttonCancel setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [self.viewButtonBackground addSubview:self.buttonCancel];
     [self.buttonCancel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -187,10 +183,10 @@
     self.pickerView = [[UIPickerView alloc] init];
     self.pickerView.dataSource = self;
     self.pickerView.delegate = self;
-//    self.pickerView.showsSelectionIndicator = YES;
     [self.viewBottom addSubview:self.pickerView];
     [self.pickerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.viewButtonBackground.mas_bottom);
+        make.height.offset(220);
         make.left.right.offset(0);
         if (@available(iOS 11.0, *)) {
             make.bottom.equalTo(self.viewBottom.mas_safeAreaLayoutGuideBottom);
@@ -203,53 +199,42 @@
     [self.buttonConfirm addTarget:self action:@selector(buttonConfirmClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.buttonCancel addTarget:self action:@selector(buttonCancelClick:) forControlEvents:UIControlEventTouchUpInside];
 
+    [self layoutIfNeeded];
+
 }
 
 - (void)reloadData {
 
     [self.pickerView reloadAllComponents];
 //    [self.pickerView layoutIfNeeded];
-    for (int i = 0; i < self.dateComponents.count; i++) {
-        NSNumber *dateComponent = self.dateComponents[i];
-        CHDatePickerViewDateComponent ch_component = [dateComponent integerValue];
-        switch (ch_component) {
-            case CHDatePickerViewDateComponentY:
-                [self.pickerView selectRow:self.currentDateComponent.year - 1 inComponent:i animated:YES];
-                break;
-            case CHDatePickerViewDateComponentM:
-                [self.pickerView selectRow:self.currentDateComponent.month - 1 inComponent:i animated:YES];
-                break;
-            case CHDatePickerViewDateComponentD:
-                [self.pickerView selectRow:self.currentDateComponent.day - 1 inComponent:i animated:YES];
-                break;
-            case CHDatePickerViewDateComponentH:
-                [self.pickerView selectRow:self.currentDateComponent.hour inComponent:i animated:YES];
-                break;
-            case CHDatePickerViewDateComponentm:
-                [self.pickerView selectRow:self.currentDateComponent.minute inComponent:i animated:YES];
-                break;
-            case CHDatePickerViewDateComponentS:
-                [self.pickerView selectRow:self.currentDateComponent.second inComponent:i animated:YES];
-                break;
-            default:
-                break;
-        }
-
-////#error 取不到值.明天改
-//        UILabel *label = (UILabel *)[self.pickerView viewForRow:[self.pickerView selectedRowInComponent:i] forComponent:i];
-//        label.font = self.fontSelect;
-    }
+    [self refreshPickerViewWithDateComponents:self.currentDateComponent animated:NO];
     [self refreshSelectDate];
 }
 
 - (void)show {
     self.hidden = NO;
+    [self.viewBottom mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.right.offset(0);
+    }];
+    [UIView animateWithDuration:.25 animations:^{
+        self.viewShade.backgroundColor = [UIColor colorWithWhite:.25 alpha:.5];
+        [self layoutIfNeeded];
+    }];
     [self reloadData];
 }
 
 - (void)dismiss {
-    self.hidden = YES;
-    [self removeFromSuperview];
+    [self.viewBottom mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_bottom);
+        make.left.right.offset(0);
+    }];
+    [UIView animateWithDuration:.25 animations:^{
+        self.viewShade.backgroundColor = [UIColor clearColor];
+        [self layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        self.hidden = YES;
+        [self removeFromSuperview];
+    }];
 }
 
 // MARK: UIPickerViewDataSource
@@ -289,22 +274,22 @@
     CHDatePickerViewDateComponent ch_component = [dateComponent integerValue];
     switch (ch_component) {
         case CHDatePickerViewDateComponentY:
-            text = [NSString stringWithFormat:@"%@年",self.years[row]];
+            text = [NSString stringWithFormat:@"%@%@",self.years[row], [NSBundle ch_localizedStringForKey:@"YearStr"]];
             break;
         case CHDatePickerViewDateComponentM:
-            text = [NSString stringWithFormat:@"%@月",self.months[row]];
+            text = [NSString stringWithFormat:@"%@%@",self.months[row], [NSBundle ch_localizedStringForKey:@"MonthStr"]];
             break;
         case CHDatePickerViewDateComponentD:
-            text = [NSString stringWithFormat:@"%@日",self.days[row]];
+            text = [NSString stringWithFormat:@"%@%@",self.days[row], [NSBundle ch_localizedStringForKey:@"DayStr"]];
             break;
         case CHDatePickerViewDateComponentH:
-            text = [NSString stringWithFormat:@"%@时",self.hours[row]];
+            text = [NSString stringWithFormat:@"%@%@",self.hours[row], [NSBundle ch_localizedStringForKey:@"HourStr"]];
             break;
         case CHDatePickerViewDateComponentm:
-            text = [NSString stringWithFormat:@"%@分",self.minutes[row]];
+            text = [NSString stringWithFormat:@"%@%@",self.minutes[row], [NSBundle ch_localizedStringForKey:@"MinuteStr"]];
             break;
         case CHDatePickerViewDateComponentS:
-            text = [NSString stringWithFormat:@"%@秒",self.seconds[row]];
+            text = [NSString stringWithFormat:@"%@%@",self.seconds[row], [NSBundle ch_localizedStringForKey:@"SecondStr"]];
             break;
         default:
             text = @"";
@@ -316,40 +301,19 @@
 
 // MARK: UIPickerViewDelegate
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-//    UILabel *label = (UILabel *)[self.pickerView viewForRow:row forComponent:component];
-//    label.font = self.fontSelect;
-    NSNumber *dateComponent = self.dateComponents[component];
-    CHDatePickerViewDateComponent ch_component = [dateComponent integerValue];
-    switch (ch_component) {
-        case CHDatePickerViewDateComponentY:/// 滚动年
-
-            break;
-        case CHDatePickerViewDateComponentM:/// 滚动月
-
-            break;
-        case CHDatePickerViewDateComponentD:/// 滚动日
-
-            break;
-        case CHDatePickerViewDateComponentH:
-
-            break;
-        case CHDatePickerViewDateComponentm:
-
-            break;
-        case CHDatePickerViewDateComponentS:
-
-            break;
-        default:
-
-            break;
-    }
     [self refreshSelectDate];
 }
 
 // MARK: Action
 - (void)buttonConfirmClick:(UIButton *)sender {
+    [self refreshSelectDate];
+    /// Block
     if (self.didSelectDateBlock) {
         self.didSelectDateBlock(self.selectDate ,[self.selectDate ch_getComponents]);
+    }
+    /// Delegate
+    if (self.delegate && [self.delegate respondsToSelector:@selector(datePickerViewDidSelectDate:dateComponents:)]) {
+        [self.delegate datePickerViewDidSelectDate:self.selectDate dateComponents:[self.selectDate ch_getComponents]];
     }
     [self dismiss];
 }
@@ -369,33 +333,7 @@
     }
     if (minDate && maxDate) {
         NSDateComponents *dateComponents = [date ch_getComponents];
-        for (int i = 0; i < self.dateComponents.count; i++) {
-            NSNumber *dateComponent = self.dateComponents[i];
-            CHDatePickerViewDateComponent ch_component = [dateComponent integerValue];
-            switch (ch_component) {
-                case CHDatePickerViewDateComponentY:
-                    [self.pickerView selectRow:dateComponents.year - 1 inComponent:i animated:YES];
-                    break;
-                case CHDatePickerViewDateComponentM:
-                    [self.pickerView selectRow:dateComponents.month - 1 inComponent:i animated:YES];
-                    break;
-                case CHDatePickerViewDateComponentD:
-                    [self.pickerView selectRow:dateComponents.day - 1 inComponent:i animated:YES];
-                    break;
-                case CHDatePickerViewDateComponentH:
-                    [self.pickerView selectRow:dateComponents.hour inComponent:i animated:YES];
-                    break;
-                case CHDatePickerViewDateComponentm:
-                    [self.pickerView selectRow:dateComponents.minute inComponent:i animated:YES];
-                    break;
-                case CHDatePickerViewDateComponentS:
-                    [self.pickerView selectRow:dateComponents.second inComponent:i animated:YES];
-                    break;
-                default:
-
-                    break;
-            }
-        }
+        [self refreshPickerViewWithDateComponents:dateComponents animated:animated];
         [self refreshSelectDate];
     }
 }
@@ -471,39 +409,13 @@
             (maximumDateComponents.year == year && maximumDateComponents.month == month && maximumDateComponents.day == day && maximumDateComponents.hour < hour) ||
             (maximumDateComponents.year == year && maximumDateComponents.month == month && maximumDateComponents.day == day && maximumDateComponents.hour == hour && maximumDateComponents.minute < minute) ||
             (maximumDateComponents.year == year && maximumDateComponents.month == month && maximumDateComponents.day == day && maximumDateComponents.hour == hour && maximumDateComponents.minute == minute && maximumDateComponents.second < second)) {///滚动到最大的年月日
-            for (int i = 0; i < self.dateComponents.count; i++) {
-                NSNumber *dateComponent = self.dateComponents[i];
-                CHDatePickerViewDateComponent ch_component = [dateComponent integerValue];
-                switch (ch_component) {
-                    case CHDatePickerViewDateComponentY:
-                        [self.pickerView selectRow:maximumDateComponents.year - 1 inComponent:i animated:YES];
-                        year = maximumDateComponents.year;
-                        break;
-                    case CHDatePickerViewDateComponentM:
-                        [self.pickerView selectRow:maximumDateComponents.month - 1 inComponent:i animated:YES];
-                        month = maximumDateComponents.month;
-                        break;
-                    case CHDatePickerViewDateComponentD:
-                        [self.pickerView selectRow:maximumDateComponents.day - 1 inComponent:i animated:YES];
-                        day = maximumDateComponents.day;
-                        break;
-                    case CHDatePickerViewDateComponentH:
-                        [self.pickerView selectRow:maximumDateComponents.hour inComponent:i animated:YES];
-                        hour = maximumDateComponents.hour;
-                        break;
-                    case CHDatePickerViewDateComponentm:
-                        [self.pickerView selectRow:maximumDateComponents.minute inComponent:i animated:YES];
-                        year = maximumDateComponents.minute;
-                        break;
-                    case CHDatePickerViewDateComponentS:
-                        [self.pickerView selectRow:maximumDateComponents.second inComponent:i animated:YES];
-                        year = maximumDateComponents.second;
-                        break;
-                    default:
-
-                        break;
-                }
-            }
+            year = maximumDateComponents.year;
+            month = maximumDateComponents.month;
+            day = maximumDateComponents.day;
+            hour = maximumDateComponents.hour;
+            minute = maximumDateComponents.minute;
+            second = maximumDateComponents.second;
+            [self refreshPickerViewWithDateComponents:maximumDateComponents animated:YES];
         }
     }
     if (self.minimumDate) {
@@ -514,42 +426,45 @@
             (minimuDateComponents.year == year && minimuDateComponents.month == month && minimuDateComponents.day == day && minimuDateComponents.hour > hour) ||
             (minimuDateComponents.year == year && minimuDateComponents.month == month && minimuDateComponents.day == day && minimuDateComponents.hour == hour && minimuDateComponents.minute > minute) ||
             (minimuDateComponents.year == year && minimuDateComponents.month == month && minimuDateComponents.day == day && minimuDateComponents.hour == hour && minimuDateComponents.minute == minute && minimuDateComponents.second > second)) {///滚动到最小的年月日
-            for (int i = 0; i < self.dateComponents.count; i++) {
-                NSNumber *dateComponent = self.dateComponents[i];
-                CHDatePickerViewDateComponent ch_component = [dateComponent integerValue];
-                switch (ch_component) {
-                    case CHDatePickerViewDateComponentY:
-                        [self.pickerView selectRow:minimuDateComponents.year - 1 inComponent:i animated:YES];
-                        year = minimuDateComponents.year;
-                        break;
-                    case CHDatePickerViewDateComponentM:
-                        [self.pickerView selectRow:minimuDateComponents.month - 1 inComponent:i animated:YES];
-                        month = minimuDateComponents.month;
-                        break;
-                    case CHDatePickerViewDateComponentD:
-                        [self.pickerView selectRow:minimuDateComponents.day - 1 inComponent:i animated:YES];
-                        day = minimuDateComponents.day;
-                        break;
-                    case CHDatePickerViewDateComponentH:
-                        [self.pickerView selectRow:minimuDateComponents.hour inComponent:i animated:YES];
-                        hour = minimuDateComponents.hour;
-                        break;
-                    case CHDatePickerViewDateComponentm:
-                        [self.pickerView selectRow:minimuDateComponents.minute inComponent:i animated:YES];
-                        year = minimuDateComponents.minute;
-                        break;
-                    case CHDatePickerViewDateComponentS:
-                        [self.pickerView selectRow:minimuDateComponents.second inComponent:i animated:YES];
-                        year = minimuDateComponents.second;
-                        break;
-                    default:
-
-                        break;
-                }
-            }
+            year = minimuDateComponents.year;
+            month = minimuDateComponents.month;
+            day = minimuDateComponents.day;
+            hour = minimuDateComponents.hour;
+            year = minimuDateComponents.minute;
+            year = minimuDateComponents.second;
+            [self refreshPickerViewWithDateComponents:minimuDateComponents animated:YES];
         }
     }
     self.selectDate = [NSDate ch_setYear:year month:month day:day hour:hour minute:minute second:second];
+}
+
+- (void)refreshPickerViewWithDateComponents:(NSDateComponents *)dateComponents animated:(BOOL)animated {
+    for (int i = 0; i < self.dateComponents.count; i++) {
+        NSNumber *dateComponent = self.dateComponents[i];
+        CHDatePickerViewDateComponent ch_component = [dateComponent integerValue];
+        switch (ch_component) {
+            case CHDatePickerViewDateComponentY:
+                [self.pickerView selectRow:dateComponents.year - 1 inComponent:i animated:animated];
+                break;
+            case CHDatePickerViewDateComponentM:
+                [self.pickerView selectRow:dateComponents.month - 1 inComponent:i animated:animated];
+                break;
+            case CHDatePickerViewDateComponentD:
+                [self.pickerView selectRow:dateComponents.day - 1 inComponent:i animated:animated];
+                break;
+            case CHDatePickerViewDateComponentH:
+                [self.pickerView selectRow:dateComponents.hour inComponent:i animated:animated];
+                break;
+            case CHDatePickerViewDateComponentm:
+                [self.pickerView selectRow:dateComponents.minute inComponent:i animated:animated];
+                break;
+            case CHDatePickerViewDateComponentS:
+                [self.pickerView selectRow:dateComponents.second inComponent:i animated:animated];
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 @end

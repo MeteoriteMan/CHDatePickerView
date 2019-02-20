@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		391FC50980FAB4D6F086C2ED /* libPods-CHDatePicker-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BEC4405124A7FE02B028A71 /* libPods-CHDatePicker-Demo.a */; };
+		4312599D221CFBE500CEB654 /* CHDatePickerLocalizable.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4312599C221CFBE500CEB654 /* CHDatePickerLocalizable.bundle */; };
+		431259A0221CFDBE00CEB654 /* NSBundle+CHDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4312599F221CFDBE00CEB654 /* NSBundle+CHDatePicker.m */; };
 		433409CB221A46E30012142E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 433409CA221A46E30012142E /* AppDelegate.m */; };
 		433409CE221A46E30012142E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 433409CD221A46E30012142E /* ViewController.m */; };
 		433409D1221A46E30012142E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 433409CF221A46E30012142E /* Main.storyboard */; };
@@ -20,6 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4312599C221CFBE500CEB654 /* CHDatePickerLocalizable.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CHDatePickerLocalizable.bundle; sourceTree = "<group>"; };
+		4312599E221CFDBE00CEB654 /* NSBundle+CHDatePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSBundle+CHDatePicker.h"; sourceTree = "<group>"; };
+		4312599F221CFDBE00CEB654 /* NSBundle+CHDatePicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+CHDatePicker.m"; sourceTree = "<group>"; };
 		433409C6221A46E30012142E /* CHDatePicker-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CHDatePicker-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		433409C9221A46E30012142E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		433409CA221A46E30012142E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -105,6 +110,9 @@
 				43FAC697221A979A004FCF0D /* CHDatePickerView.m */,
 				433409EA221A6C210012142E /* NSDate+CHCategory.h */,
 				433409E8221A6C210012142E /* NSDate+CHCategory.m */,
+				4312599E221CFDBE00CEB654 /* NSBundle+CHDatePicker.h */,
+				4312599F221CFDBE00CEB654 /* NSBundle+CHDatePicker.m */,
+				4312599C221CFBE500CEB654 /* CHDatePickerLocalizable.bundle */,
 			);
 			name = CHDateSource;
 			path = ../../CHDateSource;
@@ -177,6 +185,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4312599D221CFBE500CEB654 /* CHDatePickerLocalizable.bundle in Resources */,
 				433409D9221A46E70012142E /* LaunchScreen.storyboard in Resources */,
 				433409D6221A46E70012142E /* Assets.xcassets in Resources */,
 				433409D1221A46E30012142E /* Main.storyboard in Resources */,
@@ -215,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				431259A0221CFDBE00CEB654 /* NSBundle+CHDatePicker.m in Sources */,
 				433409D4221A46E30012142E /* CHDatePicker_Demo.xcdatamodeld in Sources */,
 				433409CE221A46E30012142E /* ViewController.m in Sources */,
 				433409DC221A46E70012142E /* main.m in Sources */,
