@@ -42,7 +42,12 @@ typedef void(^CHDatePickerViewDidSelectDateBlock)(NSDate *date ,NSDateComponents
 @property (nonatomic ,strong) NSDateComponents *currentDateComponent;
 
 /// 默认字体大小
-@property (nonatomic ,strong) UIFont *fontDefault;
+@property (nonatomic ,strong) UIFont *textFont;
+
+@property (nonatomic ,strong) UIColor *textColor;
+
+@property (nullable, nonatomic, strong) NSDate *minimumDate; // specify min/max date range. default is nil. When min > max, the values are ignored. Ignored in countdown timer mode
+@property (nullable, nonatomic, strong) NSDate *maximumDate; // default is nil
 
 @property (nonatomic ,copy) CHDatePickerViewDidSelectDateBlock didSelectDateBlock;
 
@@ -51,6 +56,8 @@ typedef void(^CHDatePickerViewDidSelectDateBlock)(NSDate *date ,NSDateComponents
 - (void)show;
 
 - (void)dismiss;
+
+- (void)setDate:(NSDate *)date animated:(BOOL)animated;
 
 @end
 

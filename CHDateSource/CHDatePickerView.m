@@ -65,11 +65,20 @@
 }
 */
 
-- (UIFont *)fontDefault {
-    if (!_fontDefault) {
-        _fontDefault = [UIFont systemFontOfSize:12];
+// MARK: getter
+
+- (UIFont *)textFont {
+    if (!_textFont) {
+        _textFont = [UIFont systemFontOfSize:12];
     }
-    return _fontDefault;
+    return _textFont;
+}
+
+- (UIColor *)textColor {
+    if (!_textColor) {
+        _textColor = [UIColor darkTextColor];
+    }
+    return _textColor;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -88,37 +97,37 @@
     /// 年
     NSMutableArray *arrayYearsM = [NSMutableArray array];
     for (int i = 1; i < 10001; i++) {
-        [arrayYearsM addObject:[NSNumber numberWithInteger:i]];;
+        [arrayYearsM addObject:[NSNumber numberWithInteger:i]];
     }
     self.years = arrayYearsM.copy;
     /// 月
     NSMutableArray *arrayMonthsM = [NSMutableArray array];
     for (int i = 1; i < 13; i++) {
-        [arrayMonthsM addObject:[NSNumber numberWithInteger:i]];;
+        [arrayMonthsM addObject:[NSNumber numberWithInteger:i]];
     }
     self.months = arrayMonthsM.copy;
     /// 日
     NSMutableArray *arrayDaysM = [NSMutableArray array];
     for (int i = 1; i < 32; i++) {
-        [arrayDaysM addObject:[NSNumber numberWithInteger:i]];;
+        [arrayDaysM addObject:[NSNumber numberWithInteger:i]];
     }
     self.days = arrayDaysM.copy;
     /// 时
     NSMutableArray *arrayHoursM = [NSMutableArray array];
     for (int i = 0; i < 24; i++) {
-        [arrayHoursM addObject:[NSNumber numberWithInteger:i]];;
+        [arrayHoursM addObject:[NSNumber numberWithInteger:i]];
     }
     self.hours = arrayHoursM.copy;
     /// 分
     NSMutableArray *minutesM = [NSMutableArray array];
     for (int i = 0; i < 60; i++) {
-        [minutesM addObject:[NSNumber numberWithInteger:i]];;
+        [minutesM addObject:[NSNumber numberWithInteger:i]];
     }
     self.minutes = minutesM.copy;
     /// 秒
     NSMutableArray *arraySecondsM = [NSMutableArray array];
     for (int i = 0; i < 60; i++) {
-        [arraySecondsM addObject:[NSNumber numberWithInteger:i]];;
+        [arraySecondsM addObject:[NSNumber numberWithInteger:i]];
     }
     self.seconds = arraySecondsM.copy;
 }
@@ -199,7 +208,7 @@
 - (void)reloadData {
 
     [self.pickerView reloadAllComponents];
-    [self.pickerView layoutIfNeeded];
+//    [self.pickerView layoutIfNeeded];
     for (int i = 0; i < self.dateComponents.count; i++) {
         NSNumber *dateComponent = self.dateComponents[i];
         CHDatePickerViewDateComponent ch_component = [dateComponent integerValue];
@@ -225,6 +234,10 @@
             default:
                 break;
         }
+
+////#error 取不到值.明天改
+//        UILabel *label = (UILabel *)[self.pickerView viewForRow:[self.pickerView selectedRowInComponent:i] forComponent:i];
+//        label.font = self.fontSelect;
     }
     [self refreshSelectDate];
 }
@@ -268,7 +281,8 @@
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     UILabel *label = [[UILabel alloc] init];
-    label.font = self.fontDefault;
+    label.font = self.textFont;
+    label.textColor = self.textColor;
     label.textAlignment = NSTextAlignmentCenter;
     NSString *text = @"";
     NSNumber *dateComponent = self.dateComponents[component];
@@ -302,6 +316,8 @@
 
 // MARK: UIPickerViewDelegate
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+//    UILabel *label = (UILabel *)[self.pickerView viewForRow:row forComponent:component];
+//    label.font = self.fontSelect;
     NSNumber *dateComponent = self.dateComponents[component];
     CHDatePickerViewDateComponent ch_component = [dateComponent integerValue];
     switch (ch_component) {
@@ -340,6 +356,48 @@
 
 - (void)buttonCancelClick:(UIButton *)sender {
     [self dismiss];
+}
+
+- (void)setDate:(NSDate *)date animated:(BOOL)animated {
+    BOOL minDate = NO;
+    BOOL maxDate = NO;
+    if (!self.minimumDate || date.timeIntervalSince1970 > self.minimumDate.timeIntervalSince1970) {
+        minDate = YES;
+    }
+    if (!self.maximumDate || date.timeIntervalSince1970 < self.maximumDate.timeIntervalSince1970) {
+        maxDate = YES;
+    }
+    if (minDate && maxDate) {
+        NSDateComponents *dateComponents = [date ch_getComponents];
+        for (int i = 0; i < self.dateComponents.count; i++) {
+            NSNumber *dateComponent = self.dateComponents[i];
+            CHDatePickerViewDateComponent ch_component = [dateComponent integerValue];
+            switch (ch_component) {
+                case CHDatePickerViewDateComponentY:
+                    [self.pickerView selectRow:dateComponents.year - 1 inComponent:i animated:YES];
+                    break;
+                case CHDatePickerViewDateComponentM:
+                    [self.pickerView selectRow:dateComponents.month - 1 inComponent:i animated:YES];
+                    break;
+                case CHDatePickerViewDateComponentD:
+                    [self.pickerView selectRow:dateComponents.day - 1 inComponent:i animated:YES];
+                    break;
+                case CHDatePickerViewDateComponentH:
+                    [self.pickerView selectRow:dateComponents.hour inComponent:i animated:YES];
+                    break;
+                case CHDatePickerViewDateComponentm:
+                    [self.pickerView selectRow:dateComponents.minute inComponent:i animated:YES];
+                    break;
+                case CHDatePickerViewDateComponentS:
+                    [self.pickerView selectRow:dateComponents.second inComponent:i animated:YES];
+                    break;
+                default:
+
+                    break;
+            }
+        }
+        [self refreshSelectDate];
+    }
 }
 
 /// 刷新当前选中日期
@@ -401,6 +459,93 @@
                 default:
 
                     break;
+            }
+        }
+    }
+    /// 判断最大最小日期
+    if (self.maximumDate) {
+        NSDateComponents *maximumDateComponents = [self.maximumDate ch_getComponents];
+        if (maximumDateComponents.year < year ||
+            (maximumDateComponents.year == year && maximumDateComponents.month < month) ||
+            (maximumDateComponents.year == year && maximumDateComponents.month == month && maximumDateComponents.day < day) ||
+            (maximumDateComponents.year == year && maximumDateComponents.month == month && maximumDateComponents.day == day && maximumDateComponents.hour < hour) ||
+            (maximumDateComponents.year == year && maximumDateComponents.month == month && maximumDateComponents.day == day && maximumDateComponents.hour == hour && maximumDateComponents.minute < minute) ||
+            (maximumDateComponents.year == year && maximumDateComponents.month == month && maximumDateComponents.day == day && maximumDateComponents.hour == hour && maximumDateComponents.minute == minute && maximumDateComponents.second < second)) {///滚动到最大的年月日
+            for (int i = 0; i < self.dateComponents.count; i++) {
+                NSNumber *dateComponent = self.dateComponents[i];
+                CHDatePickerViewDateComponent ch_component = [dateComponent integerValue];
+                switch (ch_component) {
+                    case CHDatePickerViewDateComponentY:
+                        [self.pickerView selectRow:maximumDateComponents.year - 1 inComponent:i animated:YES];
+                        year = maximumDateComponents.year;
+                        break;
+                    case CHDatePickerViewDateComponentM:
+                        [self.pickerView selectRow:maximumDateComponents.month - 1 inComponent:i animated:YES];
+                        month = maximumDateComponents.month;
+                        break;
+                    case CHDatePickerViewDateComponentD:
+                        [self.pickerView selectRow:maximumDateComponents.day - 1 inComponent:i animated:YES];
+                        day = maximumDateComponents.day;
+                        break;
+                    case CHDatePickerViewDateComponentH:
+                        [self.pickerView selectRow:maximumDateComponents.hour inComponent:i animated:YES];
+                        hour = maximumDateComponents.hour;
+                        break;
+                    case CHDatePickerViewDateComponentm:
+                        [self.pickerView selectRow:maximumDateComponents.minute inComponent:i animated:YES];
+                        year = maximumDateComponents.minute;
+                        break;
+                    case CHDatePickerViewDateComponentS:
+                        [self.pickerView selectRow:maximumDateComponents.second inComponent:i animated:YES];
+                        year = maximumDateComponents.second;
+                        break;
+                    default:
+
+                        break;
+                }
+            }
+        }
+    }
+    if (self.minimumDate) {
+        NSDateComponents *minimuDateComponents = [self.minimumDate ch_getComponents];
+        if (minimuDateComponents.year > year ||
+            (minimuDateComponents.year == year && minimuDateComponents.month > month) ||
+            (minimuDateComponents.year == year && minimuDateComponents.month == month && minimuDateComponents.day > day) ||
+            (minimuDateComponents.year == year && minimuDateComponents.month == month && minimuDateComponents.day == day && minimuDateComponents.hour > hour) ||
+            (minimuDateComponents.year == year && minimuDateComponents.month == month && minimuDateComponents.day == day && minimuDateComponents.hour == hour && minimuDateComponents.minute > minute) ||
+            (minimuDateComponents.year == year && minimuDateComponents.month == month && minimuDateComponents.day == day && minimuDateComponents.hour == hour && minimuDateComponents.minute == minute && minimuDateComponents.second > second)) {///滚动到最小的年月日
+            for (int i = 0; i < self.dateComponents.count; i++) {
+                NSNumber *dateComponent = self.dateComponents[i];
+                CHDatePickerViewDateComponent ch_component = [dateComponent integerValue];
+                switch (ch_component) {
+                    case CHDatePickerViewDateComponentY:
+                        [self.pickerView selectRow:minimuDateComponents.year - 1 inComponent:i animated:YES];
+                        year = minimuDateComponents.year;
+                        break;
+                    case CHDatePickerViewDateComponentM:
+                        [self.pickerView selectRow:minimuDateComponents.month - 1 inComponent:i animated:YES];
+                        month = minimuDateComponents.month;
+                        break;
+                    case CHDatePickerViewDateComponentD:
+                        [self.pickerView selectRow:minimuDateComponents.day - 1 inComponent:i animated:YES];
+                        day = minimuDateComponents.day;
+                        break;
+                    case CHDatePickerViewDateComponentH:
+                        [self.pickerView selectRow:minimuDateComponents.hour inComponent:i animated:YES];
+                        hour = minimuDateComponents.hour;
+                        break;
+                    case CHDatePickerViewDateComponentm:
+                        [self.pickerView selectRow:minimuDateComponents.minute inComponent:i animated:YES];
+                        year = minimuDateComponents.minute;
+                        break;
+                    case CHDatePickerViewDateComponentS:
+                        [self.pickerView selectRow:minimuDateComponents.second inComponent:i animated:YES];
+                        year = minimuDateComponents.second;
+                        break;
+                    default:
+
+                        break;
+                }
             }
         }
     }
