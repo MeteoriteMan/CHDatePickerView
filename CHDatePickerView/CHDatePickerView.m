@@ -142,6 +142,10 @@
         default:
             break;
     }
+}
+
+- (void)setDateComponents:(NSArray *)dateComponents {
+    _dateComponents = dateComponents;
     [self reloadData];
 }
 
@@ -508,6 +512,12 @@
             year = minimuDateComponents.second;
             [self refreshPickerViewWithDateComponents:minimuDateComponents animated:YES];
         }
+    }
+    if (month == 0) {
+        month = 1;
+    }
+    if (day == 0) {
+        day = 1;
     }
     self.selectDate = [NSDate ch_setYear:year month:month day:day hour:hour minute:minute second:second];
 }

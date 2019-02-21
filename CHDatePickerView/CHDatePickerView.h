@@ -93,6 +93,10 @@ typedef void(^CHDatePickerViewDidSelectDateBlock)(NSDate *date ,NSDateComponents
 /// 快速设置排列方式(内置年月日)
 @property (nonatomic ,assign) CHDatePickerViewDateStyle dateStyle;
 
+@property (nonatomic ,weak) id <CHDatePickerViewDelegate> delegate;
+
+@property (nonatomic ,copy) CHDatePickerViewDidSelectDateBlock didSelectDateBlock;
+
 /// 按钮背景板
 @property (nonatomic ,strong) UIView *viewButtonBackground;
 
@@ -112,10 +116,6 @@ typedef void(^CHDatePickerViewDidSelectDateBlock)(NSDate *date ,NSDateComponents
 @property (nullable, nonatomic, strong) NSDate *minimumDate; // specify min/max date range. default is nil. When min > max, the values are ignored. Ignored in countdown timer mode
 
 @property (nullable, nonatomic, strong) NSDate *maximumDate; // default is nil
-
-@property (nonatomic ,copy) CHDatePickerViewDidSelectDateBlock didSelectDateBlock;
-
-@property (nonatomic ,weak) id <CHDatePickerViewDelegate> delegate;
 
 - (void)show;
 
