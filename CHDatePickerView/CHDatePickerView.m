@@ -73,6 +73,13 @@
     return _textColor;
 }
 
+- (NSDate *)date {
+    if (!_date) {
+        _date = [NSDate date];
+    }
+    return _date;
+}
+
 - (void)setDateStyle:(CHDatePickerViewDateStyle)dateStyle {
     _dateStyle = dateStyle;
     switch (dateStyle) {
@@ -158,8 +165,7 @@
 }
 
 - (void)setupConfig {
-    NSDate *date = [NSDate date];
-    self.currentDateComponent = [date ch_getComponents];
+
     /// 设置默认日期选择器模式
     self.dateStyle = CHDatePickerViewDateStyleYMD;
     /// 年
@@ -279,8 +285,7 @@
 - (void)reloadData {
 
     [self.pickerView reloadAllComponents];
-//    [self.pickerView layoutIfNeeded];
-    [self refreshPickerViewWithDateComponents:self.currentDateComponent animated:NO];
+    [self refreshPickerViewWithDateComponents:[self.date ch_getComponents] animated:NO];
     [self refreshSelectDate];
 }
 

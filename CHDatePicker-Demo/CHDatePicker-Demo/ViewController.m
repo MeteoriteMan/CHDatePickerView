@@ -22,6 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 
+    UIDatePicker;
     self.labelTime = [UILabel new];
     [self.view addSubview:self.labelTime];
     [self.labelTime mas_makeConstraints:^(MASConstraintMaker *make) {

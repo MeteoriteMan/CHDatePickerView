@@ -81,6 +81,7 @@ typedef void(^CHDatePickerViewDidSelectDateBlock)(NSDate *date ,NSDateComponents
 
 @protocol CHDatePickerViewDelegate <NSObject>
 
+@optional
 - (void)datePickerViewDidSelectDate:(NSDate *)date dateComponents:(NSDateComponents *)dateComponents;
 
 @end
@@ -106,15 +107,19 @@ typedef void(^CHDatePickerViewDidSelectDateBlock)(NSDate *date ,NSDateComponents
 /// 取消按钮
 @property (nonatomic ,strong) UIButton *buttonCancel;
 
-@property (nonatomic ,strong) NSDateComponents *currentDateComponent;
-
-/// 默认字体大小
+/// 字体大小
 @property (nonatomic ,strong) UIFont *textFont;
 
+/// 文字颜色
 @property (nonatomic ,strong) UIColor *textColor;
 
-@property (nullable, nonatomic, strong) NSDate *minimumDate; // specify min/max date range. default is nil. When min > max, the values are ignored. Ignored in countdown timer mode
+// 默认的选中时间.默认为当前时间[NSDate date]
+@property (nonatomic, strong) NSDate *date;
 
+/// 允许选中的最小时间
+@property (nullable, nonatomic, strong) NSDate *minimumDate; // default is nil
+
+/// 允许选中的最大时间
 @property (nullable, nonatomic, strong) NSDate *maximumDate; // default is nil
 
 - (void)show;

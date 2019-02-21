@@ -10,5 +10,6 @@
 #define CHDatePickerViewHeader_h
 
 #import "CHDatePickerView.h"
+#import "NSDate+CHCategory.h"
 
 #endif /* CHDateSourceHeader_h */
