@@ -37,7 +37,7 @@
 		433409DA221A46E70012142E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		433409DB221A46E70012142E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		433409E8221A6C210012142E /* NSDate+CHCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CHCategory.m"; sourceTree = "<group>"; };
-		433409E9221A6C210012142E /* CHDateSourceHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDateSourceHeader.h; sourceTree = "<group>"; };
+		433409E9221A6C210012142E /* CHDatePickerViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDatePickerViewHeader.h; sourceTree = "<group>"; };
 		433409EA221A6C210012142E /* NSDate+CHCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+CHCategory.h"; sourceTree = "<group>"; };
 		43FAC696221A979A004FCF0D /* CHDatePickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHDatePickerView.h; sourceTree = "<group>"; };
 		43FAC697221A979A004FCF0D /* CHDatePickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHDatePickerView.m; sourceTree = "<group>"; };
@@ -87,7 +87,7 @@
 		433409C8221A46E30012142E /* CHDatePicker-Demo */ = {
 			isa = PBXGroup;
 			children = (
-				433409E7221A6C210012142E /* CHDateSource */,
+				433409E7221A6C210012142E /* CHDatePickerView */,
 				433409C9221A46E30012142E /* AppDelegate.h */,
 				433409CA221A46E30012142E /* AppDelegate.m */,
 				433409CC221A46E30012142E /* ViewController.h */,
@@ -102,10 +102,10 @@
 			path = "CHDatePicker-Demo";
 			sourceTree = "<group>";
 		};
-		433409E7221A6C210012142E /* CHDateSource */ = {
+		433409E7221A6C210012142E /* CHDatePickerView */ = {
 			isa = PBXGroup;
 			children = (
-				433409E9221A6C210012142E /* CHDateSourceHeader.h */,
+				433409E9221A6C210012142E /* CHDatePickerViewHeader.h */,
 				43FAC696221A979A004FCF0D /* CHDatePickerView.h */,
 				43FAC697221A979A004FCF0D /* CHDatePickerView.m */,
 				433409EA221A6C210012142E /* NSDate+CHCategory.h */,
@@ -114,8 +114,8 @@
 				4312599F221CFDBE00CEB654 /* NSBundle+CHDatePicker.m */,
 				4312599C221CFBE500CEB654 /* CHDatePickerLocalizable.bundle */,
 			);
-			name = CHDateSource;
-			path = ../../CHDateSource;
+			name = CHDatePickerView;
+			path = ../../CHDatePickerView;
 			sourceTree = "<group>";
 		};
 		AEF84BC7CA2FFFAAB3D12B54 /* Pods */ = {

@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "CHDateSourceHeader.h"
+#import "CHDatePickerViewHeader.h"
 #import "Masonry.h"
 
 @interface ViewController ()
@@ -22,11 +22,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 
-//    NSDate *date = [NSDate ch_setYear:2020 month:2];
-//    NSTimeInterval timeInterval = [date timeIntervalSince1970];
-//    NSInteger days = [date ch_getDays];
-
-    
     self.labelTime = [UILabel new];
     [self.view addSubview:self.labelTime];
     [self.labelTime mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -38,18 +33,10 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     __weak typeof(self) weakSelf = self;
     CHDatePickerView *datePicker = [[CHDatePickerView alloc] init];
-    datePicker.maximumDate = [NSDate date];
     datePicker.didSelectDateBlock = ^(NSDate * _Nonnull date, NSDateComponents * _Nonnull dateComponents) {
         weakSelf.labelTime.text = [NSString stringWithFormat:@"%ld年%ld月%ld日%ld时%ld分%ld秒",dateComponents.year ,dateComponents.month ,dateComponents.day ,dateComponents.hour ,dateComponents.minute ,dateComponents.second];
     };
-    datePicker.dateComponents = @[@(CHDatePickerViewDateComponentY) ,@(CHDatePickerViewDateComponentM) ,@(CHDatePickerViewDateComponentD) ,@(CHDatePickerViewDateComponentH) ,@(CHDatePickerViewDateComponentm) ,@(CHDatePickerViewDateComponentS)];
-//  @[@(CHDatePickerViewDateComponentH) ,@(CHDatePickerViewDateComponentm) ,@(CHDatePickerViewDateComponentS)];
     [datePicker show];
-
-//    // 测试手动调用日期
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * .5), dispatch_get_main_queue(), ^{
-//        [datePicker setDate:[NSDate dateWithTimeIntervalSince1970:10000] animated:YES];
-//    });
 }
 
 @end

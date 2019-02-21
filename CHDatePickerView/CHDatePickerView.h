@@ -22,14 +22,59 @@ typedef NS_ENUM(NSUInteger, CHDatePickerViewDateComponent) {
     /// 分
     CHDatePickerViewDateComponentm,
     /// 秒
-    CHDatePickerViewDateComponentS,
+    CHDatePickerViewDateComponents,
+};
+
+typedef NS_ENUM(NSUInteger, CHDatePickerViewDateStyle) {
+    /// 年月日时分秒
+    CHDatePickerViewDateStyleYMDHms,
+    /// 年月日时分
+    CHDatePickerViewDateStyleYMDHm,
+    /// 年月日时
+    CHDatePickerViewDateStyleYMDH,
+    /// 年月日
+    CHDatePickerViewDateStyleYMD,
+    /// 年月
+    CHDatePickerViewDateStyleYM,
+    /// 年
+    CHDatePickerViewDateStyleY,
+    /// 月日时分秒
+    CHDatePickerViewDateStyleMDHms,
+    /// 月日时分
+    CHDatePickerViewDateStyleMDHm,
+    /// 月日时分
+    CHDatePickerViewDateStyleMDH,
+    /// 月日
+    CHDatePickerViewDateStyleMD,
+    /// 月
+    CHDatePickerViewDateStyleM,
+    /// 日时分秒
+    CHDatePickerViewDateStyleDHms,
+    /// 日时分
+    CHDatePickerViewDateStyleDHm,
+    /// 日时
+    CHDatePickerViewDateStyleDH,
+    /// 日
+    CHDatePickerViewDateStyleD,
+    /// 时分秒
+    CHDatePickerViewDateStyleHms,
+    /// 时分
+    CHDatePickerViewDateStyleHm,
+    /// 时
+    CHDatePickerViewDateStyleH,
+    /// 分秒
+    CHDatePickerViewDateStylems,
+    /// 分
+    CHDatePickerViewDateStylem,
+    /// 秒
+    CHDatePickerViewDateStyles,
 };
 
 typedef void(^CHDatePickerViewDidSelectDateBlock)(NSDate *date ,NSDateComponents *dateComponents);
 
 /// 1.年份从1-10000
 /// 2.月份从1-12
-/// 3.日从1-31(如果月份没有31(2月之类的)选中之后自动滚动到最近的一个日)
+/// 3.日从1-31(如果月份没有31(2月之类的)选中之后自动滚动到最近的一个日,仿苹果UIDatePicker效果)
 /// 4.时0-23
 /// 5.分0-59
 /// 6.秒0-59
@@ -42,8 +87,14 @@ typedef void(^CHDatePickerViewDidSelectDateBlock)(NSDate *date ,NSDateComponents
 
 @interface CHDatePickerView : UIView
 
-/// 日期组成
+/// 手动设置排列方式
 @property (nonatomic ,strong) NSArray *dateComponents;
+
+/// 快速设置排列方式(内置年月日)
+@property (nonatomic ,assign) CHDatePickerViewDateStyle dateStyle;
+
+/// 按钮背景板
+@property (nonatomic ,strong) UIView *viewButtonBackground;
 
 /// 确认按钮
 @property (nonatomic ,strong) UIButton *buttonConfirm;
@@ -65,8 +116,6 @@ typedef void(^CHDatePickerViewDidSelectDateBlock)(NSDate *date ,NSDateComponents
 @property (nonatomic ,copy) CHDatePickerViewDidSelectDateBlock didSelectDateBlock;
 
 @property (nonatomic ,weak) id <CHDatePickerViewDelegate> delegate;
-
-- (void)reloadData;
 
 - (void)show;
 

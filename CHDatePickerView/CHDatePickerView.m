@@ -22,9 +22,6 @@
 
 @property (nonatomic ,strong) UIPickerView *pickerView;
 
-/// 按钮背景板
-@property (nonatomic ,strong) UIView *viewButtonBackground;
-
 /// 当前选中日期
 @property (nonatomic ,strong) NSDate *selectDate;
 
@@ -76,6 +73,78 @@
     return _textColor;
 }
 
+- (void)setDateStyle:(CHDatePickerViewDateStyle)dateStyle {
+    _dateStyle = dateStyle;
+    switch (dateStyle) {
+        case CHDatePickerViewDateStyleYMDHms:/// 年月日时分秒
+            self.dateComponents = @[@(CHDatePickerViewDateComponentY) ,@(CHDatePickerViewDateComponentM) ,@(CHDatePickerViewDateComponentD) ,@(CHDatePickerViewDateComponentH) ,@(CHDatePickerViewDateComponentm) ,@(CHDatePickerViewDateComponents)];
+            break;
+        case CHDatePickerViewDateStyleYMDHm:/// 年月日时分
+            self.dateComponents = @[@(CHDatePickerViewDateComponentY) ,@(CHDatePickerViewDateComponentM) ,@(CHDatePickerViewDateComponentD) ,@(CHDatePickerViewDateComponentH) ,@(CHDatePickerViewDateComponentm)];
+            break;
+        case CHDatePickerViewDateStyleYMDH:/// 年月日时
+            self.dateComponents = @[@(CHDatePickerViewDateComponentY) ,@(CHDatePickerViewDateComponentM) ,@(CHDatePickerViewDateComponentD) ,@(CHDatePickerViewDateComponentH)];
+            break;
+        case CHDatePickerViewDateStyleYMD: /// 年月日
+            self.dateComponents = @[@(CHDatePickerViewDateComponentY) ,@(CHDatePickerViewDateComponentM) ,@(CHDatePickerViewDateComponentD)];
+            break;
+        case CHDatePickerViewDateStyleYM:/// 年月
+            self.dateComponents = @[@(CHDatePickerViewDateComponentY) ,@(CHDatePickerViewDateComponentM)];
+            break;
+        case CHDatePickerViewDateStyleY:/// 年
+            self.dateComponents = @[@(CHDatePickerViewDateComponentY)];
+            break;
+        case CHDatePickerViewDateStyleMDHms:/// 月日时分秒
+            self.dateComponents = @[@(CHDatePickerViewDateComponentM) ,@(CHDatePickerViewDateComponentD) ,@(CHDatePickerViewDateComponentH) ,@(CHDatePickerViewDateComponentm) ,@(CHDatePickerViewDateComponents)];
+            break;
+        case CHDatePickerViewDateStyleMDHm:/// 月日时分
+            self.dateComponents = @[@(CHDatePickerViewDateComponentM) ,@(CHDatePickerViewDateComponentD) ,@(CHDatePickerViewDateComponentH) ,@(CHDatePickerViewDateComponentm)];
+            break;
+        case CHDatePickerViewDateStyleMDH:/// 月日时
+            self.dateComponents = @[@(CHDatePickerViewDateComponentM) ,@(CHDatePickerViewDateComponentD) ,@(CHDatePickerViewDateComponentH)];
+            break;
+        case CHDatePickerViewDateStyleMD:/// 月日
+            self.dateComponents = @[@(CHDatePickerViewDateComponentM) ,@(CHDatePickerViewDateComponentD)];
+            break;
+        case CHDatePickerViewDateStyleM:/// 月日
+            self.dateComponents = @[@(CHDatePickerViewDateComponentM)];
+            break;
+        case CHDatePickerViewDateStyleDHms:/// 日时分秒
+            self.dateComponents = @[@(CHDatePickerViewDateComponentD) ,@(CHDatePickerViewDateComponentH) ,@(CHDatePickerViewDateComponentm) ,@(CHDatePickerViewDateComponents)];
+            break;
+        case CHDatePickerViewDateStyleDHm:/// 日时分
+            self.dateComponents = @[@(CHDatePickerViewDateComponentD) ,@(CHDatePickerViewDateComponentH) ,@(CHDatePickerViewDateComponentm)];
+            break;
+        case CHDatePickerViewDateStyleDH:/// 日时
+            self.dateComponents = @[@(CHDatePickerViewDateComponentD) ,@(CHDatePickerViewDateComponentH)];
+            break;
+        case CHDatePickerViewDateStyleD:/// 日
+            self.dateComponents = @[@(CHDatePickerViewDateComponentD)];
+            break;
+        case CHDatePickerViewDateStyleHms:/// 时分秒
+            self.dateComponents = @[@(CHDatePickerViewDateComponentH) ,@(CHDatePickerViewDateComponentm) ,@(CHDatePickerViewDateComponents)];
+            break;
+        case CHDatePickerViewDateStyleHm:/// 时分
+            self.dateComponents = @[@(CHDatePickerViewDateComponentH) ,@(CHDatePickerViewDateComponentm)];
+            break;
+        case CHDatePickerViewDateStyleH:/// 时
+            self.dateComponents = @[@(CHDatePickerViewDateComponentH)];
+            break;
+        case CHDatePickerViewDateStylems:/// 分秒
+            self.dateComponents = @[@(CHDatePickerViewDateComponentm) ,@(CHDatePickerViewDateComponents)];
+            break;
+        case CHDatePickerViewDateStylem:/// 分
+            self.dateComponents = @[@(CHDatePickerViewDateComponentm)];
+            break;
+        case CHDatePickerViewDateStyles:/// 秒
+            self.dateComponents = @[@(CHDatePickerViewDateComponents)];
+            break;
+        default:
+            break;
+    }
+    [self reloadData];
+}
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         [self setupConfig];
@@ -88,7 +157,7 @@
     NSDate *date = [NSDate date];
     self.currentDateComponent = [date ch_getComponents];
     /// 设置默认日期选择器模式
-    self.dateComponents = @[@(CHDatePickerViewDateComponentY) ,@(CHDatePickerViewDateComponentM) ,@(CHDatePickerViewDateComponentD)];
+    self.dateStyle = CHDatePickerViewDateStyleYMD;
     /// 年
     NSMutableArray *arrayYearsM = [NSMutableArray array];
     for (int i = 1; i < 10001; i++) {
@@ -248,16 +317,22 @@
     switch (ch_component) {
         case CHDatePickerViewDateComponentY:
             return self.years.count;
+            break;
         case CHDatePickerViewDateComponentM:
             return self.months.count;
+            break;
         case CHDatePickerViewDateComponentD:
             return self.days.count;
+            break;
         case CHDatePickerViewDateComponentH:
             return self.hours.count;
+            break;
         case CHDatePickerViewDateComponentm:
             return self.minutes.count;
-        case CHDatePickerViewDateComponentS:
+            break;
+        case CHDatePickerViewDateComponents:
             return self.seconds.count;
+            break;
         default:
             return 0;
             break;
@@ -288,7 +363,7 @@
         case CHDatePickerViewDateComponentm:
             text = [NSString stringWithFormat:@"%@%@",self.minutes[row], [NSBundle ch_localizedStringForKey:@"MinuteStr"]];
             break;
-        case CHDatePickerViewDateComponentS:
+        case CHDatePickerViewDateComponents:
             text = [NSString stringWithFormat:@"%@%@",self.seconds[row], [NSBundle ch_localizedStringForKey:@"SecondStr"]];
             break;
         default:
@@ -365,11 +440,10 @@
             case CHDatePickerViewDateComponentm:
                 minute = [self.pickerView selectedRowInComponent:i] >=0?[self.pickerView selectedRowInComponent:i]:0;
                 break;
-            case CHDatePickerViewDateComponentS:
+            case CHDatePickerViewDateComponents:
                 second = [self.pickerView selectedRowInComponent:i] >=0?[self.pickerView selectedRowInComponent:i]:0;
                 break;
             default:
-
                 break;
         }
     }
@@ -392,7 +466,7 @@
                     break;
                 case CHDatePickerViewDateComponentm:
                     break;
-                case CHDatePickerViewDateComponentS:
+                case CHDatePickerViewDateComponents:
                     break;
                 default:
 
@@ -458,7 +532,7 @@
             case CHDatePickerViewDateComponentm:
                 [self.pickerView selectRow:dateComponents.minute inComponent:i animated:animated];
                 break;
-            case CHDatePickerViewDateComponentS:
+            case CHDatePickerViewDateComponents:
                 [self.pickerView selectRow:dateComponents.second inComponent:i animated:animated];
                 break;
             default:
