@@ -48,7 +48,9 @@
 
 @end
 
-@implementation CHDatePickerView
+@implementation CHDatePickerView {
+    NSDate *_date;
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -171,6 +173,11 @@
     self.pickerView.pickerViewSeparatorColor = pickerViewSeparatorColor;
 }
 
+- (void)setDate:(NSDate *)date {
+    _date = date;
+    [self setDate:date animated:YES];
+}
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         [self setupConfig];
@@ -222,22 +229,19 @@
 }
 
 - (void)setupUI {
-
     [[UIApplication sharedApplication].delegate.window addSubview:self];
     [self mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.offset(0);
     }];
     self.hidden = YES;
-
     self.viewShade = [UIView new];
+    self.viewShade.backgroundColor = [UIColor clearColor];
     [self addSubview:self.viewShade];
     [self.viewShade mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.offset(0);
     }];
-
     self.viewShadeTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
     [self.viewShade addGestureRecognizer:self.viewShadeTap];
-
     self.viewBottom = [UIView new];
     self.viewBottom.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.viewBottom];
@@ -245,7 +249,6 @@
         make.top.equalTo(self.mas_bottom);
         make.left.right.offset(0);
     }];
-
     self.viewButtonBackground = [UIView new];
     self.viewButtonBackground.backgroundColor = [UIColor whiteColor];
     [self.viewBottom addSubview:self.viewButtonBackground];
@@ -253,10 +256,9 @@
         make.left.top.right.offset(0);
         make.height.offset(38);
     }];
-
     self.buttonConfirm = [UIButton new];
     [self.buttonConfirm setTitle:[NSBundle ch_localizedStringForKey:@"Confirm"] forState:UIControlStateNormal];
-    self.buttonConfirm.titleLabel.font = [UIFont systemFontOfSize:14];
+    self.buttonConfirm.titleLabel.font = [UIFont systemFontOfSize:16];
     [self.buttonConfirm setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [self.viewButtonBackground addSubview:self.buttonConfirm];
     [self.buttonConfirm mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -267,10 +269,9 @@
         }
         make.top.bottom.offset(0);
     }];
-
     self.buttonCancel = [UIButton new];
     [self.buttonCancel setTitle:[NSBundle ch_localizedStringForKey:@"Cancel"] forState:UIControlStateNormal];
-    self.buttonCancel.titleLabel.font = [UIFont systemFontOfSize:14];
+    self.buttonCancel.titleLabel.font = [UIFont systemFontOfSize:16];
     [self.buttonCancel setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [self.viewButtonBackground addSubview:self.buttonCancel];
     [self.buttonCancel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -281,7 +282,12 @@
         }
         make.top.bottom.offset(0);
     }];
-
+    self.viewButtonBackgroundBottomLine = [UIView new];
+    [self.viewButtonBackground addSubview:self.viewButtonBackgroundBottomLine];
+    [self.viewButtonBackgroundBottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.right.offset(0);
+        make.height.mas_equalTo([NSNumber numberWithFloat:.5]);
+    }];
     self.pickerView = [[CHPickerView alloc] init];
     self.pickerView.dataSource = self;
     self.pickerView.delegate = self;
@@ -292,25 +298,18 @@
         if (@available(iOS 11.0, *)) {
             make.left.equalTo(self.viewBottom.mas_safeAreaLayoutGuideLeft);
             make.right.equalTo(self.viewBottom.mas_safeAreaLayoutGuideRight);
-        } else {
-            make.left.right.offset(0);
-        }
-        if (@available(iOS 11.0, *)) {
             make.bottom.equalTo(self.viewBottom.mas_safeAreaLayoutGuideBottom);
         } else {
+            make.left.right.offset(0);
             make.bottom.offset(0);
         }
     }];
-
     [self.buttonConfirm addTarget:self action:@selector(buttonConfirmClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.buttonCancel addTarget:self action:@selector(buttonCancelClick:) forControlEvents:UIControlEventTouchUpInside];
-
     [self layoutIfNeeded];
-
 }
 
 - (void)reloadData {
-
     [self.pickerView reloadAllComponents];
     [self refreshPickerViewWithDateComponents:[self.date ch_getComponents] animated:NO];
     [self refreshSelectDate];
@@ -434,6 +433,7 @@
 }
 
 - (void)setDate:(NSDate *)date animated:(BOOL)animated {
+    _date = date;
     BOOL minDate = NO;
     BOOL maxDate = NO;
     if (!self.minimumDate || date.timeIntervalSince1970 > self.minimumDate.timeIntervalSince1970) {

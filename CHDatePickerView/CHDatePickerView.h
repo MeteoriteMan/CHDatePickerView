@@ -101,6 +101,9 @@ typedef void(^CHDatePickerViewDidSelectDateBlock)(NSDate *date ,NSDateComponents
 /// 按钮背景板
 @property (nonatomic ,strong) UIView *viewButtonBackground;
 
+/// 按钮背景板底部线 default color is nil
+@property (nonatomic ,strong) UIView *viewButtonBackgroundBottomLine;
+
 /// 确认按钮
 @property (nonatomic ,strong) UIButton *buttonConfirm;
 
