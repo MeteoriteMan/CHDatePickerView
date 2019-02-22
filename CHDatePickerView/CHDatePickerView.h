@@ -122,6 +122,12 @@ typedef void(^CHDatePickerViewDidSelectDateBlock)(NSDate *date ,NSDateComponents
 /// 允许选中的最大时间
 @property (nullable, nonatomic, strong) NSDate *maximumDate; // default is nil
 
+/// 是否datePickerView显示分割线
+@property (nonatomic ,assign) BOOL pickerViewSeparatorHidden;
+
+/// datePickerView分割线颜色
+@property (nonatomic ,strong) UIColor *pickerViewSeparatorColor;
+
 - (void)show;
 
 - (void)dismiss;

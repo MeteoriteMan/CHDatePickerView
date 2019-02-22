@@ -10,6 +10,7 @@
 #import "Masonry.h"
 #import "NSDate+CHCategory.h"
 #import "NSBundle+CHDatePicker.h"
+#import "CHPickerView.h"
 
 @interface CHDatePickerView () <UIPickerViewDataSource ,UIPickerViewDelegate>
 
@@ -20,7 +21,7 @@
 /// 白色背景板
 @property (nonatomic ,strong) UIView *viewBottom;
 
-@property (nonatomic ,strong) UIPickerView *pickerView;
+@property (nonatomic ,strong) CHPickerView *pickerView;
 
 /// 当前选中日期
 @property (nonatomic ,strong) NSDate *selectDate;
@@ -79,6 +80,12 @@
     }
     return _date;
 }
+
+- (BOOL)isPickerViewSeparatorHidden {
+    return self.pickerView.pickerViewSeparatorHidden;
+}
+
+// MARK: setter
 
 - (void)setDateStyle:(CHDatePickerViewDateStyle)dateStyle {
     _dateStyle = dateStyle;
@@ -154,6 +161,14 @@
 - (void)setDateComponents:(NSArray *)dateComponents {
     _dateComponents = dateComponents;
     [self reloadData];
+}
+
+- (void)setPickerViewSeparatorHidden:(BOOL)pickerViewSeparatorHidden {
+    self.pickerView.pickerViewSeparatorHidden = pickerViewSeparatorHidden;
+}
+
+- (void)setPickerViewSeparatorColor:(UIColor *)pickerViewSeparatorColor {
+    self.pickerView.pickerViewSeparatorColor = pickerViewSeparatorColor;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -245,7 +260,11 @@
     [self.buttonConfirm setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [self.viewButtonBackground addSubview:self.buttonConfirm];
     [self.buttonConfirm mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-13);
+        if (@available(iOS 11.0, *)) {
+            make.right.equalTo(self.viewButtonBackground.mas_safeAreaLayoutGuideRight).offset(-13);
+        } else {
+            make.right.offset(-13);
+        }
         make.top.bottom.offset(0);
     }];
 
@@ -255,22 +274,30 @@
     [self.buttonCancel setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [self.viewButtonBackground addSubview:self.buttonCancel];
     [self.buttonCancel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(13);
+        if (@available(iOS 11.0, *)) {
+            make.left.equalTo(self.viewButtonBackground.mas_safeAreaLayoutGuideLeft).offset(13);
+        } else {
+            make.left.offset(13);
+        }
         make.top.bottom.offset(0);
     }];
 
-    self.pickerView = [[UIPickerView alloc] init];
+    self.pickerView = [[CHPickerView alloc] init];
     self.pickerView.dataSource = self;
     self.pickerView.delegate = self;
     [self.viewBottom addSubview:self.pickerView];
     [self.pickerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.viewButtonBackground.mas_bottom);
         make.height.offset(220);
-        make.left.right.offset(0);
+        if (@available(iOS 11.0, *)) {
+            make.left.equalTo(self.viewBottom.mas_safeAreaLayoutGuideLeft);
+            make.right.equalTo(self.viewBottom.mas_safeAreaLayoutGuideRight);
+        } else {
+            make.left.right.offset(0);
+        }
         if (@available(iOS 11.0, *)) {
             make.bottom.equalTo(self.viewBottom.mas_safeAreaLayoutGuideBottom);
         } else {
-            // Fallback on earlier versions
             make.bottom.offset(0);
         }
     }];

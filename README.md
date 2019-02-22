@@ -8,6 +8,9 @@
 ### 手动设置样式
 ![](https://github.com/MeteoriteMan/Assets/blob/master/gif/CHDatePickerView-Demo-Style1-iPhone%20SE.gif?raw=true)
 
+### iPhone X/横屏/横竖屏切换支持
+![](https://github.com/MeteoriteMan/Assets/blob/master/gif/CHDatePickerView-Demo-iPhone%20X.gif?raw=true)
+
 ## 使用
 
 1.起调datePickerView
@@ -55,6 +58,7 @@ datePicker.didSelectDateBlock = ^(NSDate * _Nonnull date, NSDateComponents * _No
 ```
 一些常用的属性我已经抛在外头了.
 
+// MARK: 0.0.1
 /// 按钮背景板
 @property (nonatomic ,strong) UIView *viewButtonBackground;
 
@@ -78,6 +82,14 @@ datePicker.didSelectDateBlock = ^(NSDate * _Nonnull date, NSDateComponents * _No
 
 /// 允许选中的最大时间
 @property (nullable, nonatomic, strong) NSDate *maximumDate; // default is nil
+
+// MARK: 0.0.2
+/// 是否datePickerView显示分割线
+@property (nonatomic ,assign) BOOL pickerViewSeparatorHidden;
+
+/// datePickerView分割线颜色
+@property (nonatomic ,strong) UIColor *pickerViewSeparatorColor;
+
 ```
 
 如果想使用手动设置年月日可以使用`NSDate+CHCategory`内的方法
@@ -100,4 +112,5 @@ NSDate *date = [NSDate ch_setYear:year month:month day:day hour:hour minute:minu
 
 |版本|更新内容|
 |:--|:--|
+|0.0.2|修复iPhoneX横屏布局遮挡问题(PS:最开始写的时候没考虑到横屏).新增一个设置分割线的属性|
 |0.0.1|解决了一些bug,目前可以直接使用.|

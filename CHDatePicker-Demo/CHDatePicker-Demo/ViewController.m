@@ -21,14 +21,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-
-    UIDatePicker;
     self.labelTime = [UILabel new];
     [self.view addSubview:self.labelTime];
     [self.labelTime mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.centerY.equalTo(self.view);
     }];
-
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -55,6 +52,8 @@
 //    datePicker.dateStyle = CHDatePickerViewDateStylems;
 //    datePicker.dateStyle = CHDatePickerViewDateStylem;
 //    datePicker.dateStyle = CHDatePickerViewDateStyles;
+//    datePicker.pickerViewSeparatorHidden = YES;
+    datePicker.pickerViewSeparatorColor = [UIColor redColor];
     datePicker.didSelectDateBlock = ^(NSDate * _Nonnull date, NSDateComponents * _Nonnull dateComponents) {
         weakSelf.labelTime.text = [NSString stringWithFormat:@"%ld年%ld月%ld日%ld时%ld分%ld秒",dateComponents.year ,dateComponents.month ,dateComponents.day ,dateComponents.hour ,dateComponents.minute ,dateComponents.second];
     };
