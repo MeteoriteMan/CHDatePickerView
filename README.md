@@ -119,6 +119,7 @@ NSDate *date = [NSDate ch_setYear:year month:month day:day hour:hour minute:minu
 
 |版本|更新内容|
 |:--|:--|
+|0.0.4|修复本地化语言bundle不能读取的问题|
 |0.0.3|直接.date设置日期未实现的BUG,0.0.3以下版本建议使用setDate: animated:方法|
 |0.0.2|修复iPhoneX横屏布局遮挡问题(PS:最开始写的时候没考虑到横屏).新增一个设置分割线的属性|
 |0.0.1|解决了一些bug,目前可以直接使用.|
