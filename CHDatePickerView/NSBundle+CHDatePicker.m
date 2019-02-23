@@ -12,7 +12,7 @@
 @implementation NSBundle (CHDatePicker)
 
 + (instancetype)getLocalizableBundle {
-    return [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"CHDatePickerLocalizable.bundle" ofType:@""]];
+    return [NSBundle bundleWithPath:[[NSBundle bundleForClass:[CHDatePickerView class]] pathForResource:@"CHDatePickerLocalizable" ofType:@"bundle"]];
 }
 
 + (NSString *)ch_localizedStringForKey:(NSString *)key {
