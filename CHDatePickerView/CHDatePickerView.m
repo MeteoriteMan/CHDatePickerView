@@ -52,14 +52,6 @@
     NSDate *_date;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
-
 // MARK: getter
 
 - (UIFont *)textFont {
@@ -190,6 +182,7 @@
 
     /// 设置默认日期选择器模式
     self.dateStyle = CHDatePickerViewDateStyleYMD;
+    self.allowTapToDissmiss = YES;
     /// 年
     NSMutableArray *arrayYearsM = [NSMutableArray array];
     for (int i = 1; i < 10001; i++) {
@@ -240,7 +233,7 @@
     [self.viewShade mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.offset(0);
     }];
-    self.viewShadeTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
+    self.viewShadeTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewShadeTap:)];
     [self.viewShade addGestureRecognizer:self.viewShadeTap];
     self.viewBottom = [UIView new];
     self.viewBottom.backgroundColor = [UIColor whiteColor];
@@ -313,32 +306,6 @@
     [self.pickerView reloadAllComponents];
     [self refreshPickerViewWithDateComponents:[self.date ch_getComponents] animated:NO];
     [self refreshSelectDate];
-}
-
-- (void)show {
-    self.hidden = NO;
-    [self.viewBottom mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.bottom.right.offset(0);
-    }];
-    [UIView animateWithDuration:.25 animations:^{
-        self.viewShade.backgroundColor = [UIColor colorWithWhite:.25 alpha:.5];
-        [self layoutIfNeeded];
-    }];
-    [self reloadData];
-}
-
-- (void)dismiss {
-    [self.viewBottom mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_bottom);
-        make.left.right.offset(0);
-    }];
-    [UIView animateWithDuration:.25 animations:^{
-        self.viewShade.backgroundColor = [UIColor clearColor];
-        [self layoutIfNeeded];
-    } completion:^(BOOL finished) {
-        self.hidden = YES;
-        [self removeFromSuperview];
-    }];
 }
 
 // MARK: UIPickerViewDataSource
@@ -581,6 +548,38 @@
                 break;
         }
     }
+}
+
+- (void)viewShadeTap:(UITapGestureRecognizer *)sender {
+    if (self.allowTapToDissmiss) {
+        [self dismiss];
+    }
+}
+
+- (void)show {
+    self.hidden = NO;
+    [self.viewBottom mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.right.offset(0);
+    }];
+    [UIView animateWithDuration:.25 animations:^{
+        self.viewShade.backgroundColor = [UIColor colorWithWhite:.25 alpha:.5];
+        [self layoutIfNeeded];
+    }];
+    [self reloadData];
+}
+
+- (void)dismiss {
+    [self.viewBottom mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_bottom);
+        make.left.right.offset(0);
+    }];
+    [UIView animateWithDuration:.25 animations:^{
+        self.viewShade.backgroundColor = [UIColor clearColor];
+        [self layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        self.hidden = YES;
+        [self removeFromSuperview];
+    }];
 }
 
 @end

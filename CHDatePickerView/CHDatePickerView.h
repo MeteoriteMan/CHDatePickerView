@@ -131,6 +131,9 @@ typedef void(^CHDatePickerViewDidSelectDateBlock)(NSDate *date ,NSDateComponents
 /// datePickerView分割线颜色
 @property (nonatomic ,strong) UIColor *pickerViewSeparatorColor;
 
+/// 允许tap手势使pickerView隐藏
+@property (nonatomic ,assign) BOOL allowTapToDissmiss;
+
 - (void)show;
 
 - (void)dismiss;

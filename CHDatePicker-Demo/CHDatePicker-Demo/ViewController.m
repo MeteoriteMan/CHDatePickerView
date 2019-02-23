@@ -31,7 +31,7 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     __weak typeof(self) weakSelf = self;
     CHDatePickerView *datePicker = [[CHDatePickerView alloc] init];
-    datePicker.dateStyle = CHDatePickerViewDateStyleYMDHms;
+//    datePicker.dateStyle = CHDatePickerViewDateStyleYMDHms;
 //    datePicker.dateStyle = CHDatePickerViewDateStyleYMDHm;
 //    datePicker.dateStyle = CHDatePickerViewDateStyleYMDH;
 //    datePicker.dateStyle = CHDatePickerViewDateStyleYMD;
@@ -52,18 +52,20 @@
 //    datePicker.dateStyle = CHDatePickerViewDateStylems;
 //    datePicker.dateStyle = CHDatePickerViewDateStylem;
 //    datePicker.dateStyle = CHDatePickerViewDateStyles;
+    datePicker.dateComponents = @[@(CHDatePickerViewDateComponentM) ,@(CHDatePickerViewDateComponentD) ,@(CHDatePickerViewDateComponentY)];
 //    datePicker.pickerViewSeparatorHidden = YES;
-//    datePicker.pickerViewSeparatorColor = [UIColor redColor];
 //    datePicker.pickerViewSeparatorColor = [UIColor redColor];
     datePicker.didSelectDateBlock = ^(NSDate * _Nonnull date, NSDateComponents * _Nonnull dateComponents) {
         weakSelf.labelTime.text = [NSString stringWithFormat:@"%ld年%ld月%ld日%ld时%ld分%ld秒",dateComponents.year ,dateComponents.month ,dateComponents.day ,dateComponents.hour ,dateComponents.minute ,dateComponents.second];
     };
-    datePicker.date = [NSDate ch_setYear:1 month:1];
+//    datePicker.date = [NSDate ch_setYear:1 month:1];
+    datePicker.allowTapToDissmiss = NO;
+    datePicker.pickerViewSeparatorColor = [UIColor redColor];
     [datePicker show];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 2), dispatch_get_main_queue(), ^{
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 2), dispatch_get_main_queue(), ^{
 //        datePicker.date = [NSDate ch_setYear:1 month:1];
-        [datePicker setDate:[NSDate date] animated:YES];
-    });
+//        [datePicker setDate:[NSDate date] animated:YES];
+//    });
 }
 
 @end

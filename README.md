@@ -11,6 +11,9 @@
 ### iPhone X/横屏/横竖屏切换支持
 ![](https://github.com/MeteoriteMan/Assets/blob/master/gif/CHDatePickerView-Demo-iPhone%20X.gif?raw=true)
 
+### iPhone Xs Max(手动设置样式)
+![](https://github.com/MeteoriteMan/Assets/blob/master/gif/CHDatePickerView-Demo-iPhone%20Xs%20Max.gif?raw=true)
+
 ## 使用
 
 1.起调datePickerView
@@ -90,6 +93,10 @@ datePicker.didSelectDateBlock = ^(NSDate * _Nonnull date, NSDateComponents * _No
 /// datePickerView分割线颜色
 @property (nonatomic ,strong) UIColor *pickerViewSeparatorColor;
 
+// MARK: 0.0.3
+/// 允许tap手势使pickerView隐藏
+@property (nonatomic ,assign) BOOL allowTapToDissmiss;
+
 ```
 
 如果想使用手动设置年月日可以使用`NSDate+CHCategory`内的方法
@@ -112,5 +119,6 @@ NSDate *date = [NSDate ch_setYear:year month:month day:day hour:hour minute:minu
 
 |版本|更新内容|
 |:--|:--|
+|0.0.3|直接.date设置日期未实现的BUG,0.0.3以下版本建议使用setDate: animated:方法|
 |0.0.2|修复iPhoneX横屏布局遮挡问题(PS:最开始写的时候没考虑到横屏).新增一个设置分割线的属性|
 |0.0.1|解决了一些bug,目前可以直接使用.|
