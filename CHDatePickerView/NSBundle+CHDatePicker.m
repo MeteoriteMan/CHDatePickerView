@@ -11,14 +11,18 @@
 
 @implementation NSBundle (CHDatePicker)
 
+/// 获取语言Bundle
 + (instancetype)getLocalizableBundle {
     return [NSBundle bundleWithPath:[[NSBundle bundleForClass:[CHDatePickerView class]] pathForResource:@"CHDatePickerLocalizable" ofType:@"bundle"]];
 }
 
 + (NSString *)ch_localizedStringForKey:(NSString *)key {
     NSString *language = [NSLocale preferredLanguages].firstObject;
-    if ([language hasPrefix:@"zh-Hans"]) {///白名单
+    /// 语言转换白名单
+    if ([language hasPrefix:@"zh-Hans"]) {//简体
         language = @"zh-Hans";
+    } else if ([language hasPrefix:@"zh-Hant"]) {//繁体
+        language = @"zh-Hant";
     } else if ([language hasPrefix:@"en"]) {
         language = @"en";
     } else {

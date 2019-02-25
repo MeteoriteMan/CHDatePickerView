@@ -54,13 +54,15 @@
 //    datePicker.dateStyle = CHDatePickerViewDateStyles;
     datePicker.dateComponents = @[@(CHDatePickerViewDateComponentM) ,@(CHDatePickerViewDateComponentD) ,@(CHDatePickerViewDateComponentY)];
 //    datePicker.pickerViewSeparatorHidden = YES;
-//    datePicker.pickerViewSeparatorColor = [UIColor redColor];
+    datePicker.viewButtonBackground.backgroundColor = [UIColor colorWithRed:249 / 255.0 green:87 / 255.0 blue:64 / 255.0 alpha:1];
+    [datePicker.buttonConfirm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [datePicker.buttonCancel setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    datePicker.pickerViewSeparatorColor = [UIColor lightGrayColor];
     datePicker.didSelectDateBlock = ^(NSDate * _Nonnull date, NSDateComponents * _Nonnull dateComponents) {
         weakSelf.labelTime.text = [NSString stringWithFormat:@"%ld年%ld月%ld日%ld时%ld分%ld秒",dateComponents.year ,dateComponents.month ,dateComponents.day ,dateComponents.hour ,dateComponents.minute ,dateComponents.second];
     };
 //    datePicker.date = [NSDate ch_setYear:1 month:1];
     datePicker.allowTapToDissmiss = NO;
-    datePicker.pickerViewSeparatorColor = [UIColor redColor];
     [datePicker show];
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 2), dispatch_get_main_queue(), ^{
 //        datePicker.date = [NSDate ch_setYear:1 month:1];
