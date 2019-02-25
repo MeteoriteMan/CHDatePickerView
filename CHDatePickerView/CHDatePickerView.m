@@ -247,11 +247,11 @@
     [self.viewBottom addSubview:self.viewButtonBackground];
     [self.viewButtonBackground mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.offset(0);
-        make.height.offset(38);
+        make.height.offset(44);
     }];
     self.buttonConfirm = [UIButton new];
     [self.buttonConfirm setTitle:[NSBundle ch_localizedStringForKey:@"Confirm"] forState:UIControlStateNormal];
-    self.buttonConfirm.titleLabel.font = [UIFont systemFontOfSize:16];
+    self.buttonConfirm.titleLabel.font = [UIFont systemFontOfSize:18];
     [self.buttonConfirm setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [self.viewButtonBackground addSubview:self.buttonConfirm];
     [self.buttonConfirm mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -264,7 +264,7 @@
     }];
     self.buttonCancel = [UIButton new];
     [self.buttonCancel setTitle:[NSBundle ch_localizedStringForKey:@"Cancel"] forState:UIControlStateNormal];
-    self.buttonCancel.titleLabel.font = [UIFont systemFontOfSize:16];
+    self.buttonCancel.titleLabel.font = [UIFont systemFontOfSize:18];
     [self.buttonCancel setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [self.viewButtonBackground addSubview:self.buttonCancel];
     [self.buttonCancel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -379,6 +379,10 @@
 // MARK: UIPickerViewDelegate
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     [self refreshSelectDate];
+}
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+    return 40;
 }
 
 // MARK: Action

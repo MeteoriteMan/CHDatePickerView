@@ -1,5 +1,7 @@
 # CHDatePickerView
 
+> 目前支持简中、繁体、英文三种语言.
+
 ## 效果
 
 ### 默认样式
@@ -13,6 +15,11 @@
 
 ### iPhone Xs Max(手动设置样式)
 ![](https://github.com/MeteoriteMan/Assets/blob/master/gif/CHDatePickerView-Demo-iPhone%20Xs%20Max.gif?raw=true)
+
+### iPhone Xs Max(0.0.6新样式)
+> 调高了按钮背景以及row高度.以及按钮的默认大小,颜色是"自定义"的
+
+![](https://github.com/MeteoriteMan/Assets/blob/master/gif/CHDatePickerView-Demo(0.0.6)-iPhone%20Xs%20Max.gif?raw=true)
 
 ## 使用
 
@@ -119,6 +126,7 @@ NSDate *date = [NSDate ch_setYear:year month:month day:day hour:hour minute:minu
 
 |版本|更新内容|
 |:--|:--|
+|0.0.6|新增繁体中文支持.稍微调整了一下UI|
 |0.0.5|获取Bundle方式修正|
 |0.0.4|修复本地化语言bundle不能读取的问题|
 |0.0.3|直接.date设置日期未实现的BUG,0.0.3以下版本建议使用setDate: animated:方法|
