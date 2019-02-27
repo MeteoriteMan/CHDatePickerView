@@ -31,43 +31,11 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     __weak typeof(self) weakSelf = self;
     CHDatePickerView *datePicker = [[CHDatePickerView alloc] init];
-//    datePicker.dateStyle = CHDatePickerViewDateStyleYMDHms;
-//    datePicker.dateStyle = CHDatePickerViewDateStyleYMDHm;
-//    datePicker.dateStyle = CHDatePickerViewDateStyleYMDH;
-//    datePicker.dateStyle = CHDatePickerViewDateStyleYMD;
-//    datePicker.dateStyle = CHDatePickerViewDateStyleYM;
-//    datePicker.dateStyle = CHDatePickerViewDateStyleY;
-//    datePicker.dateStyle = CHDatePickerViewDateStyleMDHms;
-//    datePicker.dateStyle = CHDatePickerViewDateStyleMDHm;
-//    datePicker.dateStyle = CHDatePickerViewDateStyleMDH;
-//    datePicker.dateStyle = CHDatePickerViewDateStyleMD;
-//    datePicker.dateStyle = CHDatePickerViewDateStyleM;
-//    datePicker.dateStyle = CHDatePickerViewDateStyleDHms;
-//    datePicker.dateStyle = CHDatePickerViewDateStyleDHm;
-//    datePicker.dateStyle = CHDatePickerViewDateStyleDH;
-//    datePicker.dateStyle = CHDatePickerViewDateStyleD;
-//    datePicker.dateStyle = CHDatePickerViewDateStyleHms;
-//    datePicker.dateStyle = CHDatePickerViewDateStyleHm;
-//    datePicker.dateStyle = CHDatePickerViewDateStyleH;
-//    datePicker.dateStyle = CHDatePickerViewDateStylems;
-//    datePicker.dateStyle = CHDatePickerViewDateStylem;
-//    datePicker.dateStyle = CHDatePickerViewDateStyles;
-    datePicker.dateComponents = @[@(CHDatePickerViewDateComponentM) ,@(CHDatePickerViewDateComponentD) ,@(CHDatePickerViewDateComponentY)];
-//    datePicker.pickerViewSeparatorHidden = YES;
-    datePicker.viewButtonBackground.backgroundColor = [UIColor colorWithRed:249 / 255.0 green:87 / 255.0 blue:64 / 255.0 alpha:1];
-    [datePicker.buttonConfirm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [datePicker.buttonCancel setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    datePicker.pickerViewSeparatorColor = [UIColor lightGrayColor];
+    datePicker.dateComponents = @[@(CHDatePickerViewDateComponentY) ,@(CHDatePickerViewDateComponentM) ,@(CHDatePickerViewDateComponentD) ,@(CHDatePickerViewDateComponentHShort) ,@(CHDatePickerViewDateComponentAMPMS)];
     datePicker.didSelectDateBlock = ^(NSDate * _Nonnull date, NSDateComponents * _Nonnull dateComponents) {
         weakSelf.labelTime.text = [NSString stringWithFormat:@"%ld年%ld月%ld日%ld时%ld分%ld秒",dateComponents.year ,dateComponents.month ,dateComponents.day ,dateComponents.hour ,dateComponents.minute ,dateComponents.second];
     };
-//    datePicker.date = [NSDate ch_setYear:1 month:1];
-    datePicker.allowTapToDissmiss = NO;
     [datePicker show];
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 2), dispatch_get_main_queue(), ^{
-//        datePicker.date = [NSDate ch_setYear:1 month:1];
-//        [datePicker setDate:[NSDate date] animated:YES];
-//    });
 }
 
 @end

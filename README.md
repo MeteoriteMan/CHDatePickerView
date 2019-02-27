@@ -2,24 +2,25 @@
 
 > 目前支持简中、繁体、英文三种语言.
 
+> 内容支持年月日时分秒.也有12小时制的AM/PM
+
 ## 效果
 
 ### 默认样式
 ![](https://github.com/MeteoriteMan/Assets/blob/master/gif/CHDatePickerView-Demo-iPhone%20SE.gif?raw=true)
 
-### 手动设置样式
-![](https://github.com/MeteoriteMan/Assets/blob/master/gif/CHDatePickerView-Demo-Style1-iPhone%20SE.gif?raw=true)
-
-### iPhone X/横屏/横竖屏切换支持
-![](https://github.com/MeteoriteMan/Assets/blob/master/gif/CHDatePickerView-Demo-iPhone%20X.gif?raw=true)
-
-### iPhone Xs Max(手动设置样式)
+### iPhone Xs Max(手动设置样式.横屏/横竖屏切换支持)
 ![](https://github.com/MeteoriteMan/Assets/blob/master/gif/CHDatePickerView-Demo-iPhone%20Xs%20Max.gif?raw=true)
 
 ### iPhone Xs Max(0.0.6新样式)
 > 调高了按钮背景以及row高度.以及按钮的默认大小,颜色是"自定义"的
 
 ![](https://github.com/MeteoriteMan/Assets/blob/master/gif/CHDatePickerView-Demo(0.0.6)-iPhone%20Xs%20Max.gif?raw=true)
+
+### iPhone SE(0.0.7新增AM/PM样式选择)
+> AM/PM为国际化的(如:中文的情况下显示的是上午/下午)
+
+![](https://github.com/MeteoriteMan/Assets/blob/master/gif/CHDatePickerView-Demo(0.0.7)-iPhone%20SE.gif?raw=true)
 
 ## 使用
 
@@ -126,6 +127,7 @@ NSDate *date = [NSDate ch_setYear:year month:month day:day hour:hour minute:minu
 
 |版本|更新内容|
 |:--|:--|
+|0.0.7|新增12小时制的component,需要自组合的形式调用|
 |0.0.6|新增繁体中文支持.稍微调整了一下UI|
 |0.0.5|获取Bundle方式修正|
 |0.0.4|修复本地化语言bundle不能读取的问题|

@@ -46,6 +46,12 @@
 /// 秒 0 -59
 @property (nonatomic ,strong) NSArray <NSNumber *> *seconds;
 
+/// shortHours 0 - 11
+@property (nonatomic ,strong) NSArray <NSNumber *> *hoursShorts;
+
+/// AM/PM 0 - 1
+@property (nonatomic ,strong) NSArray <NSNumber *> *AMPMs;
+
 @end
 
 @implementation CHDatePickerView {
@@ -208,17 +214,29 @@
     }
     self.hours = arrayHoursM.copy;
     /// 分
-    NSMutableArray *minutesM = [NSMutableArray array];
+    NSMutableArray *arrayMinutesM = [NSMutableArray array];
     for (int i = 0; i < 60; i++) {
-        [minutesM addObject:[NSNumber numberWithInteger:i]];
+        [arrayMinutesM addObject:[NSNumber numberWithInteger:i]];
     }
-    self.minutes = minutesM.copy;
+    self.minutes = arrayMinutesM.copy;
     /// 秒
     NSMutableArray *arraySecondsM = [NSMutableArray array];
     for (int i = 0; i < 60; i++) {
         [arraySecondsM addObject:[NSNumber numberWithInteger:i]];
     }
     self.seconds = arraySecondsM.copy;
+    /// 12小时制
+    NSMutableArray *arrayHoursShortsM = [NSMutableArray array];
+    for (int i = 0; i < 12; i++) {
+        [arrayHoursShortsM addObject:[NSNumber numberWithInt:i]];
+    }
+    self.hoursShorts = arrayHoursShortsM.copy;
+    NSMutableArray *arrayAMPMsM = [NSMutableArray array];
+    for (int i = 0; i < 2; i++) {
+        [arrayAMPMsM addObject:[NSNumber numberWithInt:i]];
+    }
+    self.AMPMs = arrayAMPMsM.copy;
+
 }
 
 - (void)setupUI {
@@ -335,6 +353,12 @@
         case CHDatePickerViewDateComponents:
             return self.seconds.count;
             break;
+        case CHDatePickerViewDateComponentHShort:
+            return self.hoursShorts.count;
+            break;
+        case CHDatePickerViewDateComponentAMPMS:
+            return self.AMPMs.count;
+            break;
         default:
             return 0;
             break;
@@ -367,6 +391,12 @@
             break;
         case CHDatePickerViewDateComponents:
             text = [NSString stringWithFormat:@"%@%@",self.seconds[row], [NSBundle ch_localizedStringForKey:@"SecondStr"]];
+            break;
+        case CHDatePickerViewDateComponentHShort:
+            text = [NSString stringWithFormat:@"%@%@",self.hoursShorts[row], [NSBundle ch_localizedStringForKey:@"HourStr"]];
+            break;
+        case CHDatePickerViewDateComponentAMPMS:
+            text = [self.AMPMs[row] integerValue]==1?[NSBundle ch_localizedStringForKey:@"PM"]:[NSBundle ch_localizedStringForKey:@"AM"];
             break;
         default:
             text = @"";
@@ -428,6 +458,9 @@
     NSInteger hour = 0;
     NSInteger minute = 0;
     NSInteger second = 0;
+    NSInteger hourShort = 0;
+    BOOL hasAMMP = NO;
+    NSInteger AMPM = 0;
     for (int i = 0; i < self.dateComponents.count; i++) {
         NSNumber *dateComponent = self.dateComponents[i];
         CHDatePickerViewDateComponent ch_component = [dateComponent integerValue];
@@ -450,9 +483,20 @@
             case CHDatePickerViewDateComponents:
                 second = [self.pickerView selectedRowInComponent:i] >=0?[self.pickerView selectedRowInComponent:i]:0;
                 break;
+            case CHDatePickerViewDateComponentHShort:
+                hourShort = [self.pickerView selectedRowInComponent:i] >=0?[self.pickerView selectedRowInComponent:i]:0;
+                hasAMMP = YES;
+                break;
+            case CHDatePickerViewDateComponentAMPMS:
+                AMPM = [self.pickerView selectedRowInComponent:i] >=0?[self.pickerView selectedRowInComponent:i]:0;
+                hasAMMP = YES;
+                break;
             default:
                 break;
         }
+    }
+    if (hasAMMP) {//如果是12小时制
+        hour = hourShort + AMPM * 12;
     }
     NSDate *date = [NSDate ch_setYear:year month:month];
     NSInteger days = [date ch_getDays];
@@ -475,8 +519,11 @@
                     break;
                 case CHDatePickerViewDateComponents:
                     break;
+                case CHDatePickerViewDateComponentHShort:
+                    break;
+                case CHDatePickerViewDateComponentAMPMS:
+                    break;
                 default:
-
                     break;
             }
         }
@@ -547,6 +594,12 @@
                 break;
             case CHDatePickerViewDateComponents:
                 [self.pickerView selectRow:dateComponents.second inComponent:i animated:animated];
+                break;
+            case CHDatePickerViewDateComponentHShort:
+                [self.pickerView selectRow:dateComponents.hour - (dateComponents.hour>=12?12:0) inComponent:i animated:animated];
+                break;
+            case CHDatePickerViewDateComponentAMPMS:
+                [self.pickerView selectRow:dateComponents.hour>=12?1:0 inComponent:i animated:animated];
                 break;
             default:
                 break;

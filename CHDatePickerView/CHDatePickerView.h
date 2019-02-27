@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+/// 1.年份从1-10000
+/// 2.月份从1-12
+/// 3.日从1-31(如果月份没有31(2月之类的)选中之后自动滚动到最近的一个日,仿苹果UIDatePicker效果)
+/// 4.时0-23
+/// 5.分0-59
+/// 6.秒0-59
+
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, CHDatePickerViewDateComponent) {
@@ -23,6 +30,10 @@ typedef NS_ENUM(NSUInteger, CHDatePickerViewDateComponent) {
     CHDatePickerViewDateComponentm,
     /// 秒
     CHDatePickerViewDateComponents,
+    /// 时(12小时制)
+    CHDatePickerViewDateComponentHShort,
+    /// AM/PM
+    CHDatePickerViewDateComponentAMPMS,
 };
 
 typedef NS_ENUM(NSUInteger, CHDatePickerViewDateStyle) {
@@ -71,13 +82,6 @@ typedef NS_ENUM(NSUInteger, CHDatePickerViewDateStyle) {
 };
 
 typedef void(^CHDatePickerViewDidSelectDateBlock)(NSDate *date ,NSDateComponents *dateComponents);
-
-/// 1.年份从1-10000
-/// 2.月份从1-12
-/// 3.日从1-31(如果月份没有31(2月之类的)选中之后自动滚动到最近的一个日,仿苹果UIDatePicker效果)
-/// 4.时0-23
-/// 5.分0-59
-/// 6.秒0-59
 
 @protocol CHDatePickerViewDelegate <NSObject>
 
