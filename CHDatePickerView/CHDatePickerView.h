@@ -6,14 +6,15 @@
 //  Copyright © 2019 张晨晖. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
+/// 注:
 /// 1.年份从1-10000
 /// 2.月份从1-12
 /// 3.日从1-31(如果月份没有31(2月之类的)选中之后自动滚动到最近的一个日,仿苹果UIDatePicker效果)
 /// 4.时0-23
 /// 5.分0-59
 /// 6.秒0-59
+
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -81,6 +82,15 @@ typedef NS_ENUM(NSUInteger, CHDatePickerViewDateStyle) {
     CHDatePickerViewDateStyles,
 };
 
+typedef NS_ENUM(NSUInteger, CHDatePickerViewDateTextShowType) {
+    /// 单行显示
+    CHDatePickerViewDateTextShowTypeSingleRow,
+    /// 不显示
+    CHDatePickerViewDateTextShowTypeNone,
+    /// 每行都显示
+    CHDatePickerViewDateTextShowTypeAllRow,
+};
+
 typedef void(^CHDatePickerViewDidSelectDateBlock)(NSDate *date ,NSDateComponents *dateComponents);
 
 @protocol CHDatePickerViewDelegate <NSObject>
@@ -98,6 +108,9 @@ typedef void(^CHDatePickerViewDidSelectDateBlock)(NSDate *date ,NSDateComponents
 /// 快速设置排列方式(内置年月日)
 @property (nonatomic ,assign) CHDatePickerViewDateStyle dateStyle;
 
+/// 年月日显示方式
+@property (nonatomic ,assign) CHDatePickerViewDateTextShowType dateTextShowType;
+
 @property (nonatomic ,weak) id <CHDatePickerViewDelegate> delegate;
 
 @property (nonatomic ,copy) CHDatePickerViewDidSelectDateBlock didSelectDateBlock;
@@ -114,11 +127,18 @@ typedef void(^CHDatePickerViewDidSelectDateBlock)(NSDate *date ,NSDateComponents
 /// 取消按钮
 @property (nonatomic ,strong) UIButton *buttonCancel;
 
+/// MARK:row的字体
 /// 字体大小
 @property (nonatomic ,strong) UIFont *textFont;
 
 /// 文字颜色
 @property (nonatomic ,strong) UIColor *textColor;
+
+// MARK:SingleRow的字体
+@property (nonatomic ,strong) UIFont *singleRowTextFont;
+
+/// 文字颜色
+@property (nonatomic ,strong) UIColor *singleRowTextColor;
 
 // 默认的选中时间.默认为当前时间[NSDate date]
 @property (nonatomic, strong) NSDate *date;

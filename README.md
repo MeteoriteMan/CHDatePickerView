@@ -6,21 +6,31 @@
 
 ## 效果
 
-### 默认样式
-![](https://github.com/MeteoriteMan/Assets/blob/master/gif/CHDatePickerView-Demo-iPhone%20SE.gif?raw=true)
+### 默认为年月日
 
-### iPhone Xs Max(手动设置样式.横屏/横竖屏切换支持)
+### 手动设置样式.横屏/横竖屏切换支持
 ![](https://github.com/MeteoriteMan/Assets/blob/master/gif/CHDatePickerView-Demo-iPhone%20Xs%20Max.gif?raw=true)
 
-### iPhone Xs Max(0.0.6新样式)
+### 0.0.6新样式
 > 调高了按钮背景以及row高度.以及按钮的默认大小,颜色是"自定义"的
 
 ![](https://github.com/MeteoriteMan/Assets/blob/master/gif/CHDatePickerView-Demo(0.0.6)-iPhone%20Xs%20Max.gif?raw=true)
 
-### iPhone SE(0.0.7新增AM/PM样式选择)
+### 0.0.7新增AM/PM样式选择
 > AM/PM为国际化的(如:中文的情况下显示的是上午/下午)
 
 ![](https://github.com/MeteoriteMan/Assets/blob/master/gif/CHDatePickerView-Demo(0.0.7)-iPhone%20SE.gif?raw=true)
+
+### 0.0.8新增row上年月日调整(绿色的线是我设置的默认没有)
+
+**CHDatePickerViewDateTextShowTypeAllRow(默认样式)**
+![](https://github.com/MeteoriteMan/Assets/blob/master/png/CHDatePickerView-Demo-0.0.8(CHDatePickerViewDateTextShowTypeAllRow)@2x.png?raw=true)
+
+**CHDatePickerViewDateTextShowTypeNone**
+![](https://github.com/MeteoriteMan/Assets/blob/master/png/CHDatePickerView-Demo-0.0.8(CHDatePickerViewDateTextShowTypeNone)@2x.png?raw=true)
+
+**CHDatePickerViewDateTextShowTypeSingleRow**
+![](https://github.com/MeteoriteMan/Assets/blob/master/png/CHDatePickerView-Demo-0.0.8(CHDatePickerViewDateTextShowTypeSingleRow)@2x.png?raw=true)
 
 ## 使用
 
@@ -105,6 +115,16 @@ datePicker.didSelectDateBlock = ^(NSDate * _Nonnull date, NSDateComponents * _No
 /// 允许tap手势使pickerView隐藏
 @property (nonatomic ,assign) BOOL allowTapToDissmiss;
 
+// MARK: 0.0.8
+/// row中间年月日显示方式
+@property (nonatomic ,assign) CHDatePickerViewDateTextShowType dateTextShowType;
+
+// MARK:SingleRow的字体(单行显示情况下可以设置这两个属性)
+@property (nonatomic ,strong) UIFont *singleRowTextFont;
+
+/// 文字颜色
+@property (nonatomic ,strong) UIColor *singleRowTextColor;
+
 ```
 
 如果想使用手动设置年月日可以使用`NSDate+CHCategory`内的方法
@@ -127,6 +147,7 @@ NSDate *date = [NSDate ch_setYear:year month:month day:day hour:hour minute:minu
 
 |版本|更新内容|
 |:--|:--|
+|0.0.8|新增三种显示"年月日时分秒"的样式,详情见上图|
 |0.0.7|新增12小时制的component,需要自组合的形式调用|
 |0.0.6|新增繁体中文支持.稍微调整了一下UI|
 |0.0.5|获取Bundle方式修正|

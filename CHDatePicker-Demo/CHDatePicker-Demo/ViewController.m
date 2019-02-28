@@ -10,7 +10,7 @@
 #import "CHDatePickerViewHeader.h"
 #import "Masonry.h"
 
-@interface ViewController ()
+@interface ViewController () <CHDatePickerViewDelegate>
 
 @property (nonatomic ,strong) UILabel *labelTime;
 
@@ -29,13 +29,21 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    __weak typeof(self) weakSelf = self;
+//    __weak typeof(self) weakSelf = self;
     CHDatePickerView *datePicker = [[CHDatePickerView alloc] init];
+    datePicker.delegate = self;
+    datePicker.dateTextShowType = CHDatePickerViewDateTextShowTypeAllRow;
+    datePicker.pickerViewSeparatorColor = [UIColor greenColor];
     datePicker.dateComponents = @[@(CHDatePickerViewDateComponentY) ,@(CHDatePickerViewDateComponentM) ,@(CHDatePickerViewDateComponentD) ,@(CHDatePickerViewDateComponentHShort) ,@(CHDatePickerViewDateComponentAMPMS)];
-    datePicker.didSelectDateBlock = ^(NSDate * _Nonnull date, NSDateComponents * _Nonnull dateComponents) {
-        weakSelf.labelTime.text = [NSString stringWithFormat:@"%ld年%ld月%ld日%ld时%ld分%ld秒",dateComponents.year ,dateComponents.month ,dateComponents.day ,dateComponents.hour ,dateComponents.minute ,dateComponents.second];
-    };
+//    datePicker.didSelectDateBlock = ^(NSDate * _Nonnull date, NSDateComponents * _Nonnull dateComponents) {
+//        weakSelf.labelTime.text = [NSString stringWithFormat:@"%ld年%ld月%ld日%ld时%ld分%ld秒",dateComponents.year ,dateComponents.month ,dateComponents.day ,dateComponents.hour ,dateComponents.minute ,dateComponents.second];
+//    };
     [datePicker show];
+}
+
+// MARK: CHDatePickerViewDelegate
+- (void)datePickerViewDidSelectDate:(NSDate *)date dateComponents:(NSDateComponents *)dateComponents {
+    self.labelTime.text = [NSString stringWithFormat:@"%ld年%ld月%ld日%ld时%ld分%ld秒",dateComponents.year ,dateComponents.month ,dateComponents.day ,dateComponents.hour ,dateComponents.minute ,dateComponents.second];
 }
 
 @end

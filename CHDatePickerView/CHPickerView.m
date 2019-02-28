@@ -7,6 +7,7 @@
 //
 
 #import "CHPickerView.h"
+#import "Masonry.h"
 
 @implementation CHPickerView
 

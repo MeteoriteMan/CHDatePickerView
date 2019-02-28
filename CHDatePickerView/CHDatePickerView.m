@@ -12,6 +12,8 @@
 #import "NSBundle+CHDatePicker.h"
 #import "CHPickerView.h"
 
+#define RowHeight 40
+
 @interface CHDatePickerView () <UIPickerViewDataSource ,UIPickerViewDelegate>
 
 @property (nonatomic ,strong) UIView *viewShade;
@@ -22,6 +24,8 @@
 @property (nonatomic ,strong) UIView *viewBottom;
 
 @property (nonatomic ,strong) CHPickerView *pickerView;
+
+@property (nonatomic ,strong) UIView *viewTextBackground;
 
 /// 当前选中日期
 @property (nonatomic ,strong) NSDate *selectDate;
@@ -72,6 +76,20 @@
         _textColor = [UIColor darkTextColor];
     }
     return _textColor;
+}
+
+- (UIFont *)singleRowTextFont {
+    if (!_singleRowTextFont) {
+        _singleRowTextFont = self.textFont;
+    }
+    return _singleRowTextFont;
+}
+
+- (UIColor *)singleRowTextColor {
+    if (!_singleRowTextColor) {
+        _singleRowTextColor = self.textColor;
+    }
+    return _singleRowTextColor;
 }
 
 - (NSDate *)date {
@@ -163,6 +181,11 @@
     [self reloadData];
 }
 
+- (void)setDateTextShowType:(CHDatePickerViewDateTextShowType)dateTextShowType {
+    _dateTextShowType = dateTextShowType;
+    [self reloadData];
+}
+
 - (void)setPickerViewSeparatorHidden:(BOOL)pickerViewSeparatorHidden {
     self.pickerView.pickerViewSeparatorHidden = pickerViewSeparatorHidden;
 }
@@ -186,7 +209,11 @@
 
 - (void)setupConfig {
 
+    // MARK: Notification
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidChangeStatusBarOrientationNotification:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
+
     /// 设置默认日期选择器模式
+    self.dateTextShowType = CHDatePickerViewDateTextShowTypeAllRow;
     self.dateStyle = CHDatePickerViewDateStyleYMD;
     self.allowTapToDissmiss = YES;
     /// 年
@@ -315,6 +342,13 @@
             make.bottom.offset(0);
         }
     }];
+    self.viewTextBackground = [UIView new];
+    [self.pickerView addSubview:self.viewTextBackground];
+    [self.viewTextBackground mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.pickerView);
+        make.centerY.equalTo(self.pickerView);
+        make.height.offset(RowHeight);
+    }];
     [self.buttonConfirm addTarget:self action:@selector(buttonConfirmClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.buttonCancel addTarget:self action:@selector(buttonCancelClick:) forControlEvents:UIControlEventTouchUpInside];
     [self layoutIfNeeded];
@@ -324,6 +358,7 @@
     [self.pickerView reloadAllComponents];
     [self refreshPickerViewWithDateComponents:[self.date ch_getComponents] animated:NO];
     [self refreshSelectDate];
+    [self refreshViewTextBackground];
 }
 
 // MARK: UIPickerViewDataSource
@@ -370,39 +405,49 @@
     label.font = self.textFont;
     label.textColor = self.textColor;
     label.textAlignment = NSTextAlignmentCenter;
-    NSString *text = @"";
     NSNumber *dateComponent = self.dateComponents[component];
     CHDatePickerViewDateComponent ch_component = [dateComponent integerValue];
+    NSString *prefixText = @"";
+    NSString *suffixText = @"";
     switch (ch_component) {
         case CHDatePickerViewDateComponentY:
-            text = [NSString stringWithFormat:@"%@%@",self.years[row], [NSBundle ch_localizedStringForKey:@"YearStr"]];
+            prefixText = [NSString stringWithFormat:@"%@",self.years[row]];
+            suffixText = self.dateTextShowType==CHDatePickerViewDateTextShowTypeAllRow?[NSBundle ch_localizedStringForKey:@"YearStr"]:@"";
             break;
         case CHDatePickerViewDateComponentM:
-            text = [NSString stringWithFormat:@"%@%@",self.months[row], [NSBundle ch_localizedStringForKey:@"MonthStr"]];
+            prefixText = [NSString stringWithFormat:@"%@",self.months[row]];;
+            suffixText = self.dateTextShowType==CHDatePickerViewDateTextShowTypeAllRow?[NSBundle ch_localizedStringForKey:@"MonthStr"]:@"";
             break;
         case CHDatePickerViewDateComponentD:
-            text = [NSString stringWithFormat:@"%@%@",self.days[row], [NSBundle ch_localizedStringForKey:@"DayStr"]];
+            prefixText = [NSString stringWithFormat:@"%@",self.days[row]];
+            suffixText = self.dateTextShowType==CHDatePickerViewDateTextShowTypeAllRow?[NSBundle ch_localizedStringForKey:@"DayStr"]:@"";
             break;
         case CHDatePickerViewDateComponentH:
-            text = [NSString stringWithFormat:@"%@%@",self.hours[row], [NSBundle ch_localizedStringForKey:@"HourStr"]];
+            prefixText = [NSString stringWithFormat:@"%@",self.hours[row]];
+            suffixText = self.dateTextShowType==CHDatePickerViewDateTextShowTypeAllRow?[NSBundle ch_localizedStringForKey:@"HourStr"]:@"";
             break;
         case CHDatePickerViewDateComponentm:
-            text = [NSString stringWithFormat:@"%@%@",self.minutes[row], [NSBundle ch_localizedStringForKey:@"MinuteStr"]];
+            prefixText = [NSString stringWithFormat:@"%@",self.minutes[row]];
+            suffixText = self.dateTextShowType==CHDatePickerViewDateTextShowTypeAllRow?[NSBundle ch_localizedStringForKey:@"MinuteStr"]:@"";
             break;
         case CHDatePickerViewDateComponents:
-            text = [NSString stringWithFormat:@"%@%@",self.seconds[row], [NSBundle ch_localizedStringForKey:@"SecondStr"]];
+            prefixText = [NSString stringWithFormat:@"%@",self.seconds[row]];
+            suffixText = self.dateTextShowType==CHDatePickerViewDateTextShowTypeAllRow?[NSBundle ch_localizedStringForKey:@"SecondStr"]:@"";
             break;
         case CHDatePickerViewDateComponentHShort:
-            text = [NSString stringWithFormat:@"%@%@",self.hoursShorts[row], [NSBundle ch_localizedStringForKey:@"HourStr"]];
+            prefixText = [NSString stringWithFormat:@"%@",self.hoursShorts[row]];
+            suffixText = self.dateTextShowType==CHDatePickerViewDateTextShowTypeAllRow?[NSBundle ch_localizedStringForKey:@"HourStr"]:@"";
             break;
         case CHDatePickerViewDateComponentAMPMS:
-            text = [self.AMPMs[row] integerValue]==1?[NSBundle ch_localizedStringForKey:@"PM"]:[NSBundle ch_localizedStringForKey:@"AM"];
+            prefixText = [self.AMPMs[row] integerValue]==1?[NSBundle ch_localizedStringForKey:@"PM"]:[NSBundle ch_localizedStringForKey:@"AM"];
+            suffixText = @"";
             break;
         default:
-            text = @"";
+            prefixText = @"";
+            suffixText = @"";
             break;
     }
-    label.text = text;
+    label.text = [NSString stringWithFormat:@"%@%@",prefixText ,suffixText];
     return label;
 }
 
@@ -412,7 +457,7 @@
 }
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
-    return 40;
+    return RowHeight;
 }
 
 // MARK: Action
@@ -607,6 +652,60 @@
     }
 }
 
+- (void)refreshViewTextBackground {
+    for (UIView *view in self.viewTextBackground.subviews) {
+        [view removeFromSuperview];
+    }
+    if (self.dateTextShowType == CHDatePickerViewDateTextShowTypeSingleRow) {
+        for (int i = 0; i < self.dateComponents.count; i++) {
+            NSNumber *componentNumber = self.dateComponents[i];
+            CHDatePickerViewDateComponent component = [componentNumber integerValue];
+            UILabel *label = (UILabel *)[self.pickerView viewForRow:[self.pickerView selectedRowInComponent:i] forComponent:i];
+            CGRect labelRect = [label convertRect:label.frame toView:self.viewTextBackground];
+            CGFloat width = self.viewTextBackground.bounds.size.width;
+            UILabel *labelText = [[UILabel alloc] init];
+            labelText.textAlignment = NSTextAlignmentRight;
+            NSString *text = @"";
+            switch (component) {
+                case CHDatePickerViewDateComponentY:
+                    text = [NSBundle ch_localizedStringForKey:@"YearStr"];
+                    break;
+                case CHDatePickerViewDateComponentM:
+                    text = [NSBundle ch_localizedStringForKey:@"MonthStr"];
+                    break;
+                case CHDatePickerViewDateComponentD:
+                    text = [NSBundle ch_localizedStringForKey:@"DayStr"];
+                    break;
+                case CHDatePickerViewDateComponentH:
+                    text = [NSBundle ch_localizedStringForKey:@"HourStr"];
+                    break;
+                case CHDatePickerViewDateComponentm:
+                    text = [NSBundle ch_localizedStringForKey:@"MinuteStr"];
+                    break;
+                case CHDatePickerViewDateComponents:
+                    text = [NSBundle ch_localizedStringForKey:@"SecondStr"];
+                    break;
+                case CHDatePickerViewDateComponentHShort:
+                    text = [NSBundle ch_localizedStringForKey:@"HourStr"];
+                    break;
+                case CHDatePickerViewDateComponentAMPMS:
+                    text = @"";
+                    break;
+                default:
+                    break;
+            }
+            labelText.text = text;
+            labelText.textColor = self.singleRowTextColor;
+            labelText.font = self.singleRowTextFont;
+            [self.viewTextBackground addSubview:labelText];
+            [labelText mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.right.offset(-(width - labelRect.origin.x - labelRect.size.width));
+                make.centerY.equalTo(self.viewTextBackground);
+            }];
+        }
+    }
+}
+
 - (void)viewShadeTap:(UITapGestureRecognizer *)sender {
     if (self.allowTapToDissmiss) {
         [self dismiss];
@@ -637,6 +736,12 @@
         self.hidden = YES;
         [self removeFromSuperview];
     }];
+}
+
+// MARK: Notification
+- (void)applicationDidChangeStatusBarOrientationNotification:(NSNotification *)notification {
+    [self layoutIfNeeded];
+    [self refreshViewTextBackground];
 }
 
 @end
