@@ -24,12 +24,15 @@
 ### 0.0.8新增row上年月日调整(绿色的线是我设置的默认没有)
 
 **CHDatePickerViewDateTextShowTypeAllRow(默认样式)**
+
 ![](https://github.com/MeteoriteMan/Assets/blob/master/png/CHDatePickerView-Demo-0.0.8(CHDatePickerViewDateTextShowTypeAllRow)@2x.png?raw=true)
 
 **CHDatePickerViewDateTextShowTypeNone**
+
 ![](https://github.com/MeteoriteMan/Assets/blob/master/png/CHDatePickerView-Demo-0.0.8(CHDatePickerViewDateTextShowTypeNone)@2x.png?raw=true)
 
 **CHDatePickerViewDateTextShowTypeSingleRow**
+
 ![](https://github.com/MeteoriteMan/Assets/blob/master/png/CHDatePickerView-Demo-0.0.8(CHDatePickerViewDateTextShowTypeSingleRow)@2x.png?raw=true)
 
 ## 使用
