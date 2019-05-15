@@ -127,18 +127,21 @@ typedef void(^CHDatePickerViewDidSelectDateBlock)(NSDate *date ,NSDateComponents
 /// 取消按钮
 @property (nonatomic ,strong) UIButton *buttonCancel;
 
+/// 中间标题
+@property (nonatomic ,strong) UILabel *labelTitle;
+
 /// MARK:row的字体
 /// 字体大小
-@property (nonatomic ,strong) UIFont *textFont;
+@property (nonatomic ,strong) UIFont *textFont UI_APPEARANCE_SELECTOR;
 
 /// 文字颜色
-@property (nonatomic ,strong) UIColor *textColor;
+@property (nonatomic ,strong) UIColor *textColor UI_APPEARANCE_SELECTOR;
 
 // MARK:SingleRow的字体
-@property (nonatomic ,strong) UIFont *singleRowTextFont;
+@property (nonatomic ,strong) UIFont *singleRowTextFont UI_APPEARANCE_SELECTOR;
 
-/// 文字颜色
-@property (nonatomic ,strong) UIColor *singleRowTextColor;
+/// SingleRow文字颜色
+@property (nonatomic ,strong) UIColor *singleRowTextColor UI_APPEARANCE_SELECTOR;
 
 // 默认的选中时间.默认为当前时间[NSDate date]
 @property (nonatomic, strong) NSDate *date;
@@ -152,7 +155,7 @@ typedef void(^CHDatePickerViewDidSelectDateBlock)(NSDate *date ,NSDateComponents
 /// 是否datePickerView显示分割线
 @property (nonatomic ,assign) BOOL pickerViewSeparatorHidden;
 
-/// datePickerView分割线颜色
+/// datePickerView分割线颜色.可以通过CHPickerView的来设置全局的分割线颜色
 @property (nonatomic ,strong) UIColor *pickerViewSeparatorColor;
 
 /// 允许tap手势使pickerView隐藏

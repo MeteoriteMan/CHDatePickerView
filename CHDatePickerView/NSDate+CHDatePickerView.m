@@ -1,14 +1,14 @@
 //
-//  NSDate+CHCategory.m
+//  NSDate+CHDatePickerView.m
 //  CHDatePicker-Demo
 //
 //  Created by 张晨晖 on 2019/2/18.
 //  Copyright © 2019 张晨晖. All rights reserved.
 //
 
-#import "NSDate+CHCategory.h"
+#import "NSDate+CHDatePickerView.h"
 
-@implementation NSDate (CHCategory)
+@implementation NSDate (CHDatePickerView)
 
 static const NSCalendarUnit units = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitWeekday;
 

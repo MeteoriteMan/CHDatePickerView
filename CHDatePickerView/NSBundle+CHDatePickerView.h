@@ -1,5 +1,5 @@
 //
-//  NSBundle+CHDatePicker.h
+//  NSBundle+CHDatePickerView.h
 //  CHDatePicker-Demo
 //
 //  Created by 张晨晖 on 2019/2/20.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSBundle (CHDatePicker)
+@interface NSBundle (CHDatePickerView)
 
 + (NSString *)ch_localizedStringForKey:(NSString *)key;
 

@@ -1,5 +1,5 @@
 //
-//  NSDate+CHCategory.h
+//  NSDate+CHDatePickerView.h
 //  CHDatePicker-Demo
 //
 //  Created by 张晨晖 on 2019/2/18.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSDate (CHCategory)
+@interface NSDate (CHDatePickerView)
 
 /// 年
 + (NSDate *)ch_setYear:(NSInteger)year;

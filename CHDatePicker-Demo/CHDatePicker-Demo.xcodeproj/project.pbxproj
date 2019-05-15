@@ -9,37 +9,35 @@
 /* Begin PBXBuildFile section */
 		391FC50980FAB4D6F086C2ED /* libPods-CHDatePicker-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BEC4405124A7FE02B028A71 /* libPods-CHDatePicker-Demo.a */; };
 		4312599D221CFBE500CEB654 /* CHDatePickerLocalizable.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4312599C221CFBE500CEB654 /* CHDatePickerLocalizable.bundle */; };
-		431259A0221CFDBE00CEB654 /* NSBundle+CHDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4312599F221CFDBE00CEB654 /* NSBundle+CHDatePicker.m */; };
+		431259A0221CFDBE00CEB654 /* NSBundle+CHDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4312599F221CFDBE00CEB654 /* NSBundle+CHDatePickerView.m */; };
 		433409CB221A46E30012142E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 433409CA221A46E30012142E /* AppDelegate.m */; };
 		433409CE221A46E30012142E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 433409CD221A46E30012142E /* ViewController.m */; };
 		433409D1221A46E30012142E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 433409CF221A46E30012142E /* Main.storyboard */; };
-		433409D4221A46E30012142E /* CHDatePicker_Demo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 433409D2221A46E30012142E /* CHDatePicker_Demo.xcdatamodeld */; };
 		433409D6221A46E70012142E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 433409D5221A46E70012142E /* Assets.xcassets */; };
 		433409D9221A46E70012142E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 433409D7221A46E70012142E /* LaunchScreen.storyboard */; };
 		433409DC221A46E70012142E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 433409DB221A46E70012142E /* main.m */; };
-		433409EB221A6C210012142E /* NSDate+CHCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 433409E8221A6C210012142E /* NSDate+CHCategory.m */; };
+		433409EB221A6C210012142E /* NSDate+CHDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 433409E8221A6C210012142E /* NSDate+CHDatePickerView.m */; };
 		43C57473221FD4D200D9774D /* CHPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C57472221FD4D200D9774D /* CHPickerView.m */; };
 		43FAC698221A979A004FCF0D /* CHDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FAC697221A979A004FCF0D /* CHDatePickerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4312599C221CFBE500CEB654 /* CHDatePickerLocalizable.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CHDatePickerLocalizable.bundle; sourceTree = "<group>"; };
-		4312599E221CFDBE00CEB654 /* NSBundle+CHDatePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSBundle+CHDatePicker.h"; sourceTree = "<group>"; };
-		4312599F221CFDBE00CEB654 /* NSBundle+CHDatePicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+CHDatePicker.m"; sourceTree = "<group>"; };
+		4312599E221CFDBE00CEB654 /* NSBundle+CHDatePickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSBundle+CHDatePickerView.h"; sourceTree = "<group>"; };
+		4312599F221CFDBE00CEB654 /* NSBundle+CHDatePickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+CHDatePickerView.m"; sourceTree = "<group>"; };
 		433409C6221A46E30012142E /* CHDatePicker-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CHDatePicker-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		433409C9221A46E30012142E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		433409CA221A46E30012142E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		433409CC221A46E30012142E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		433409CD221A46E30012142E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		433409D0221A46E30012142E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		433409D3221A46E30012142E /* CHDatePicker_Demo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CHDatePicker_Demo.xcdatamodel; sourceTree = "<group>"; };
 		433409D5221A46E70012142E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		433409D8221A46E70012142E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		433409DA221A46E70012142E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		433409DB221A46E70012142E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		433409E8221A6C210012142E /* NSDate+CHCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CHCategory.m"; sourceTree = "<group>"; };
+		433409E8221A6C210012142E /* NSDate+CHDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CHDatePickerView.m"; sourceTree = "<group>"; };
 		433409E9221A6C210012142E /* CHDatePickerViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDatePickerViewHeader.h; sourceTree = "<group>"; };
-		433409EA221A6C210012142E /* NSDate+CHCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+CHCategory.h"; sourceTree = "<group>"; };
+		433409EA221A6C210012142E /* NSDate+CHDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+CHDatePickerView.h"; sourceTree = "<group>"; };
 		43C57471221FD4D200D9774D /* CHPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHPickerView.h; sourceTree = "<group>"; };
 		43C57472221FD4D200D9774D /* CHPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHPickerView.m; sourceTree = "<group>"; };
 		43FAC696221A979A004FCF0D /* CHDatePickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHDatePickerView.h; sourceTree = "<group>"; };
@@ -100,7 +98,6 @@
 				433409D7221A46E70012142E /* LaunchScreen.storyboard */,
 				433409DA221A46E70012142E /* Info.plist */,
 				433409DB221A46E70012142E /* main.m */,
-				433409D2221A46E30012142E /* CHDatePicker_Demo.xcdatamodeld */,
 			);
 			path = "CHDatePicker-Demo";
 			sourceTree = "<group>";
@@ -113,10 +110,10 @@
 				43FAC697221A979A004FCF0D /* CHDatePickerView.m */,
 				43C57471221FD4D200D9774D /* CHPickerView.h */,
 				43C57472221FD4D200D9774D /* CHPickerView.m */,
-				433409EA221A6C210012142E /* NSDate+CHCategory.h */,
-				433409E8221A6C210012142E /* NSDate+CHCategory.m */,
-				4312599E221CFDBE00CEB654 /* NSBundle+CHDatePicker.h */,
-				4312599F221CFDBE00CEB654 /* NSBundle+CHDatePicker.m */,
+				433409EA221A6C210012142E /* NSDate+CHDatePickerView.h */,
+				433409E8221A6C210012142E /* NSDate+CHDatePickerView.m */,
+				4312599E221CFDBE00CEB654 /* NSBundle+CHDatePickerView.h */,
+				4312599F221CFDBE00CEB654 /* NSBundle+CHDatePickerView.m */,
 				4312599C221CFBE500CEB654 /* CHDatePickerLocalizable.bundle */,
 			);
 			name = CHDatePickerView;
@@ -229,13 +226,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				431259A0221CFDBE00CEB654 /* NSBundle+CHDatePicker.m in Sources */,
-				433409D4221A46E30012142E /* CHDatePicker_Demo.xcdatamodeld in Sources */,
+				431259A0221CFDBE00CEB654 /* NSBundle+CHDatePickerView.m in Sources */,
 				433409CE221A46E30012142E /* ViewController.m in Sources */,
 				433409DC221A46E70012142E /* main.m in Sources */,
 				433409CB221A46E30012142E /* AppDelegate.m in Sources */,
 				43C57473221FD4D200D9774D /* CHPickerView.m in Sources */,
-				433409EB221A6C210012142E /* NSDate+CHCategory.m in Sources */,
+				433409EB221A6C210012142E /* NSDate+CHDatePickerView.m in Sources */,
 				43FAC698221A979A004FCF0D /* CHDatePickerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -434,19 +430,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		433409D2221A46E30012142E /* CHDatePicker_Demo.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				433409D3221A46E30012142E /* CHDatePicker_Demo.xcdatamodel */,
-			);
-			currentVersion = 433409D3221A46E30012142E /* CHDatePicker_Demo.xcdatamodel */;
-			path = CHDatePicker_Demo.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 433409BE221A46E30012142E /* Project object */;
 }

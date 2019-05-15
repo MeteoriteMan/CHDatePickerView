@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic ,assign) BOOL pickerViewSeparatorHidden;
 
 /// datePickerView分割线颜色
-@property (nonatomic ,strong) UIColor *pickerViewSeparatorColor;
+@property (nonatomic ,strong) UIColor *pickerViewSeparatorColor UI_APPEARANCE_SELECTOR;
 
 @end
 

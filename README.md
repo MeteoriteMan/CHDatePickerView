@@ -150,6 +150,7 @@ NSDate *date = [NSDate ch_setYear:year month:month day:day hour:hour minute:minu
 
 |版本|更新内容|
 |:--|:--|
+|0.0.9|新增了一个标题,对于一些属性允许设置全局值|
 |0.0.8|新增三种显示"年月日时分秒"的样式,详情见上图|
 |0.0.7|新增12小时制的component,需要自组合的形式调用|
 |0.0.6|新增繁体中文支持.稍微调整了一下UI|

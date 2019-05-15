@@ -1,15 +1,15 @@
 //
-//  NSBundle+CHDatePicker.m
+//  NSBundle+CHDatePickerView.m
 //  CHDatePicker-Demo
 //
 //  Created by 张晨晖 on 2019/2/20.
 //  Copyright © 2019 张晨晖. All rights reserved.
 //
 
-#import "NSBundle+CHDatePicker.h"
+#import "NSBundle+CHDatePickerView.h"
 #import "CHDatePickerView.h"
 
-@implementation NSBundle (CHDatePicker)
+@implementation NSBundle (CHDatePickerView)
 
 /// 获取语言Bundle
 + (instancetype)getLocalizableBundle {

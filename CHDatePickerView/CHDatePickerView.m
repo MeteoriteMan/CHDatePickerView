@@ -8,8 +8,8 @@
 
 #import "CHDatePickerView.h"
 #import "Masonry.h"
-#import "NSDate+CHCategory.h"
-#import "NSBundle+CHDatePicker.h"
+#import "NSDate+CHDatePickerView.h"
+#import "NSBundle+CHDatePickerView.h"
 #import "CHPickerView.h"
 
 #define RowHeight 40
@@ -207,6 +207,14 @@
     return self;
 }
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        [self setupConfig];
+        [self setupUI];
+    }
+    return self;
+}
+
 - (void)setupConfig {
 
     // MARK: Notification
@@ -320,6 +328,13 @@
         }
         make.top.bottom.offset(0);
     }];
+    self.labelTitle = [[UILabel alloc] init];
+//    self.labelTitle.textColor = [UIColor darkGrayColor];
+    [self.viewButtonBackground addSubview:self.labelTitle];
+    [self.labelTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.centerY.equalTo(self.viewButtonBackground);
+    }];
+
     self.viewButtonBackgroundBottomLine = [UIView new];
     [self.viewButtonBackground addSubview:self.viewButtonBackgroundBottomLine];
     [self.viewButtonBackgroundBottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -717,6 +732,9 @@
     [self.viewBottom mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.right.offset(0);
     }];
+    /// 使viewButtonBackground不参与动画
+    [self.viewButtonBackground setNeedsLayout];
+    [self.viewButtonBackground layoutIfNeeded];
     [UIView animateWithDuration:.25 animations:^{
         self.viewShade.backgroundColor = [UIColor colorWithWhite:.25 alpha:.5];
         [self layoutIfNeeded];
