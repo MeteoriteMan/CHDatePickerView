@@ -618,8 +618,8 @@
             month = minimuDateComponents.month;
             day = minimuDateComponents.day;
             hour = minimuDateComponents.hour;
-            year = minimuDateComponents.minute;
-            year = minimuDateComponents.second;
+            minute = minimuDateComponents.minute;
+            second = minimuDateComponents.second;
             [self refreshPickerViewWithDateComponents:minimuDateComponents animated:YES];
         }
     }
