@@ -275,7 +275,24 @@
 }
 
 - (void)setupUI {
-    [[UIApplication sharedApplication].delegate.window addSubview:self];
+    UIWindow *window;
+    if (@available(iOS 13.0, *)) {// iOS 13可能支持Scene,也可能不支持Scene
+        NSSet <UIScene *> *windowScenes = [UIApplication sharedApplication].connectedScenes;
+        for (UIWindowScene *windowScene in windowScenes.allObjects) {
+            if ([windowScene isKindOfClass:[UIWindowScene class]]) {
+                window = ((id <UIWindowSceneDelegate>)windowScene.delegate).window;
+            }
+        }
+        if (!window) {
+            window = [UIApplication sharedApplication].windows.firstObject;
+        }
+    } else {
+        window = [UIApplication sharedApplication].delegate.window;
+    }
+    if (!window) {
+        return;
+    }
+    [window addSubview:self];
     [self mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.offset(0);
     }];
@@ -329,7 +346,6 @@
         make.top.bottom.offset(0);
     }];
     self.labelTitle = [[UILabel alloc] init];
-//    self.labelTitle.textColor = [UIColor darkGrayColor];
     [self.viewButtonBackground addSubview:self.labelTitle];
     [self.labelTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.centerY.equalTo(self.viewButtonBackground);
