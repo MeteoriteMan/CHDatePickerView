@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "CHDatePickerView"
-    s.version      = "0.1.0"
+    s.version      = "0.2.0"
     s.summary      = "CHDatePickerView支持自组合的方式快速创建日期选择器,支持横竖屏切换适配安全区"
     s.homepage     = "https://github.com/MeteoriteMan/CHDatePicker"
     s.license      = "MIT"

@@ -277,6 +277,9 @@
 - (void)setupUI {
     UIWindow *window;
     if (@available(iOS 13.0, *)) {// iOS 13可能支持Scene,也可能不支持Scene
+        if ([UIApplication sharedApplication].supportsMultipleScenes) {// 多窗口下可能有问题,未来这个仓库会改为不依赖Window的一个View
+            return;
+        }
         NSSet <UIScene *> *windowScenes = [UIApplication sharedApplication].connectedScenes;
         for (UIWindowScene *windowScene in windowScenes.allObjects) {
             if ([windowScene isKindOfClass:[UIWindowScene class]]) {

@@ -150,6 +150,7 @@ NSDate *date = [NSDate ch_setYear:year month:month day:day hour:hour minute:minu
 
 |版本|更新内容|
 |:--|:--|
+|0.2.0|支持iOS 13,不支持多窗口(multiple windows)|
 |0.1.0|修复最小日期设置的一个小BUG|
 |0.0.9|新增了一个标题,对于一些属性允许设置全局值|
 |0.0.8|新增三种显示"年月日时分秒"的样式,详情见上图|
